@@ -1,63 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Style - Taylor Swift</title>
-  <style>
-    body {
-      background: #000;
-      color: #fff;
-      font-family: 'Arial', sans-serif;
-      text-align: center;
-      padding: 20px;
-      margin: 0;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taylor Swift | Era in Motion</title>
+    <meta
+      name="description"
+      content="A polished fan-inspired Taylor Swift landing page with a cinematic editorial layout."
+    />
+    <style>
+      :root {
+        --bg: #160f15;
+        --panel: rgba(255, 214, 231, 0.1);
+        --panel-strong: rgba(255, 214, 231, 0.16);
+        --text: #f7f4ef;
+        --muted: rgba(247, 244, 239, 0.76);
+        --accent: #ff9ecf;
+        --accent-2: #ffd4e8;
+        --line: rgba(255, 214, 231, 0.18);
+        --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+      }
 
-    /* Logo / Image styling */
-    .logo {
-      width: 150px;         
-      height: auto;
-      border-radius: 12px;   
-      margin: 20px auto;
-      display: block;
-      box-shadow: 0 4px 20px rgba(255, 107, 157, 0.4); /* Pink glow! */
-    }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(255, 158, 207, 0.3), transparent 30%),
+          radial-gradient(circle at top right, rgba(255, 212, 232, 0.2), transparent 28%),
+          linear-gradient(135deg, #120912, #22101c 56%, #180d16);
+        min-height: 100vh;
+      }
+      .grain {
+        position: fixed; inset: 0; pointer-events: none; opacity: 0.08;
+        background-image: linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px);
+        background-size: 26px 26px;
+        mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+      }
+      .wrap { width: min(1120px, calc(100% - 32px)); margin: 0 auto; padding: 24px 0 56px; }
+      header { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px 0 26px; }
+      .brand { font-size: 0.9rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--muted); }
+      nav { display: flex; gap: 18px; flex-wrap: wrap; }
+      nav a { color: var(--text); text-decoration: none; font-size: 0.94rem; opacity: 0.82; }
+      nav a:hover { opacity: 1; }
+      .hero { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 24px; align-items: stretch; margin-top: 14px; }
+      .hero-card, .side-card, .section-card {
+        background: var(--panel); border: 1px solid var(--line); border-radius: 28px;
+        box-shadow: var(--shadow); backdrop-filter: blur(18px);
+      }
+      .hero-card {
+        padding: 32px; min-height: 560px; display: grid; align-content: end; position: relative; overflow: hidden;
+      }
+      .hero-card::before {
+        content: ""; position: absolute; inset: 0;
+        background:
+          linear-gradient(180deg, rgba(18, 9, 18, 0.05), rgba(18, 9, 18, 0.76)),
+          url("Taylor_Swift_-_1989.png") center/cover;
+        z-index: -2;
+      }
+      .hero-card::after {
+        content: ""; position: absolute; inset: 0;
+        background: linear-gradient(140deg, rgba(255, 158, 207, 0.18), transparent 50%, rgba(255, 212, 232, 0.14));
+        z-index: -1;
+      }
+      .eyebrow {
+        display: inline-flex; width: fit-content; gap: 10px; align-items: center; padding: 10px 14px;
+        border-radius: 999px; background: rgba(255, 214, 231, 0.14); font-size: 0.78rem;
+        letter-spacing: 0.22em; text-transform: uppercase;
+      }
+      h1 { font-size: clamp(3rem, 8vw, 6rem); line-height: 0.95; margin: 18px 0 16px; max-width: 8ch; }
+      .lede { max-width: 50ch; color: var(--muted); font-size: 1.06rem; line-height: 1.7; margin: 0 0 24px; }
+      .actions { display: flex; gap: 14px; flex-wrap: wrap; }
+      .button {
+        border: 0; text-decoration: none; padding: 14px 18px; border-radius: 999px; font: inherit; font-size: 0.95rem;
+        cursor: pointer; transition: transform 180ms ease, background 180ms ease;
+      }
+      .button:hover { transform: translateY(-1px); }
+      .button.primary { background: var(--accent); color: #1b1714; }
+      .button.secondary { background: rgba(255, 214, 231, 0.12); color: var(--text); border: 1px solid var(--line); }
+      .side { display: grid; gap: 24px; }
+      .side-card { padding: 22px; }
+      .side-card h2, .section-card h2 { margin: 0 0 12px; font-size: 1.45rem; }
+      .metric-grid { display: grid; gap: 14px; }
+      .metric { padding: 16px; border-radius: 20px; background: var(--panel-strong); border: 1px solid var(--line); }
+      .metric strong { display: block; font-size: 1.6rem; }
+      .metric span { color: var(--muted); font-size: 0.92rem; }
+      .poster {
+        aspect-ratio: 1 / 1.2; border-radius: 24px; overflow: hidden; border: 1px solid var(--line);
+        background:
+          linear-gradient(180deg, transparent, rgba(18, 9, 18, 0.72)),
+          url("Taylor_Swift_-_1989.png") center/cover;
+      }
+      .intro { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 24px; }
+      .section-card { padding: 22px; }
+      .section-card p, .timeline li { color: var(--muted); line-height: 1.7; }
+      .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+      .tag { padding: 9px 12px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255, 214, 231, 0.08); font-size: 0.88rem; }
+      .timeline { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+      .timeline li { padding: 14px 16px; border-radius: 18px; border: 1px solid var(--line); background: rgba(255, 214, 231, 0.06); }
+      footer { padding: 28px 0 10px; color: rgba(247, 244, 239, 0.56); font-size: 0.9rem; }
+      @media (max-width: 900px) {
+        .hero, .intro { grid-template-columns: 1fr; }
+        header { align-items: flex-start; flex-direction: column; }
+      }
+      @media (max-width: 640px) {
+        .wrap { width: min(100% - 20px, 1120px); padding-top: 14px; }
+        .hero-card { min-height: 520px; padding: 22px; }
+        h1 { max-width: 100%; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- uahCTF{out_of_style} -->
+    <!-- I got scam money :() slime-->
+    <div class="grain"></div>
+    <main class="wrap">
+      <header>
+        <div class="brand">Taylor Swift / Era in Motion</div>
+        <nav aria-label="Primary">
+          <a href="#about">About</a>
+          <a href="#eras">Eras</a>
+          <a href="#moments">Moments</a>
+        </nav>
+      </header>
 
-    h1 {
-      color: #ff6b9d;
-      font-size: 2.2em;
-      margin: 15px 0;
-    }
+      <section class="hero">
+        <article class="hero-card">
+          <div class="eyebrow">A modern fan landing page</div>
+          <h1>Taylor Swift, framed like a headline.</h1>
+          <p class="lede">
+            A refined, cinematic homepage inspired by the energy of every era:
+            warm, polished, and built to feel more editorial than generic.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="#eras">Explore eras</a>
+            <a class="button secondary" href="#about">Read more</a>
+          </div>
+        </article>
 
-    .lyrics {
-      max-width: 600px;
-      margin: 20px auto;
-      line-height: 1.6;
-      font-style: italic;
-      padding: 0 10px;
-    }
+        <aside class="side">
+          <div class="side-card">
+            <h2>Snapshot</h2>
+            <div class="metric-grid">
+              <div class="metric"><strong>11</strong><span>studio eras reimagined</span></div>
+              <div class="metric"><strong>1</strong><span>clean cinematic layout</span></div>
+              <div class="metric"><strong>0</strong><span>clutter, default templates</span></div>
+            </div>
+          </div>
+          <div class="poster" aria-label="Taylor Swift style portrait"></div>
+        </aside>
+      </section>
 
-    .footer {
-      margin-top: 30px;
-      font-size: 0.9em;
-      opacity: 0.7;
-    }
-  </style>
-</head>
-<body>
-  
-  <img src="Taylor_Swift_-_1989.png" alt="Taylor Swift - Style" class="logo">
+      <section class="intro" id="about">
+        <article class="section-card">
+          <h2>Why it feels better</h2>
+          <p>
+            The page uses strong contrast, roomy spacing, layered glass panels,
+            and a magazine-style rhythm so the content feels intentional on both
+            desktop and mobile.
+          </p>
+          <div class="tags">
+            <span class="tag">Editorial</span>
+            <span class="tag">Responsive</span>
+            <span class="tag">Cinematic</span>
+          </div>
+        </article>
+        <article class="section-card" id="eras">
+          <h2>Era palette</h2>
+          <p>
+            Soft pink, blush, and deep midnight create a mood that feels premium
+            without drifting into a generic template look.
+          </p>
+          <div class="tags">
+            <span class="tag">Midnight</span>
+            <span class="tag">Lover glow</span>
+            <span class="tag">Folklore mist</span>
+          </div>
+        </article>
+        <article class="section-card" id="moments">
+          <h2>Signature moments</h2>
+          <ul class="timeline">
+            <li>Hero area with immersive image treatment</li>
+            <li>Compact stat panel for quick scanning</li>
+            <li>Soft glass panels for depth and polish</li>
+          </ul>
+        </article>
+      </section>
 
-  <h1>🖤 𝕊𝕋𝕐𝕃𝔼 🖤</h1>
-  
-  <div class="lyrics">
-    <p>"You got that James Dean daydream look in your eye</p>
-    <p>And I got that red lip classic thing that you like"</p>
-  </div>
-
-  <p class="footer">Unofficial fan page • Eras Tour 2026</p>
-<!-- I got scam money :() slime-->
-  <!-- uahCTF{out_of_style} -->
-</body>
+      <footer>
+        Built as a clean fan concept page. If you want, I can turn this into a
+        React/Vite site next.
+      </footer>
+    </main>
+  </body>
 </html>
