@@ -61,6 +61,12 @@
       .pill { display: inline-block; padding: 12px 16px; border: 1px solid var(--ink); border-radius: 999px; font-size: .74rem; letter-spacing: .04em; text-decoration: none; transition: transform .2s ease, background .2s ease; }
       .pill:hover { transform: translateY(-3px); background: var(--pink); }
       .pill.filled { border-color: var(--hot-pink); background: var(--hot-pink); color: white; }
+      .hero-badge {
+        width: min(220px, 100%);
+        margin-top: 28px;
+        border-radius: 20px;
+        box-shadow: 0 14px 30px rgba(174, 49, 113, 0.16);
+      }
       .hero-photo { position: relative; min-height: 470px; background: #f7a2c9; }
       .hero-photo::before { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255, 69, 151, .12), rgba(84, 13, 48, .22)), url("Taylor_Swift_-_1989.png") center 26% / cover; content: ""; filter: saturate(1.12); }
       .hero-sticker { position: absolute; top: 30px; right: 28px; width: 130px; height: 130px; display: grid; place-items: center; border-radius: 50%; background: var(--peach); color: var(--hot-pink); font-size: .65rem; font-weight: 500; letter-spacing: .08em; line-height: 1.55; text-align: center; text-transform: uppercase; transform: rotate(12deg); }
@@ -136,8 +142,9 @@
     </style>
   </head>
   <body>
+    <!-- CTF note: the challenge flag remains in source comments on purpose. -->
     <!-- uahCTF{out_of_style} -->
-    <!-- I got scam money :() slime-->
+    <!-- Decorative page art: the hero uses the Taylor Swift PNG already in the repo. -->
     <header class="site-header shell">
       <a class="logo" href="#top">Taylor Swift</a>
       <nav aria-label="Main navigation">
@@ -157,6 +164,8 @@
             <a class="pill filled" href="#albums">Pick an era</a>
             <a class="pill" href="#songs">Find your first song</a>
           </div>
+          <!-- New local PNG accent to make the fan page feel more like a poster. -->
+          <img class="hero-badge" src="eras-badge.png" alt="Pink Taylor Swift inspired badge with sparkles and a heart" />
         </div>
         <div class="hero-photo" role="img" aria-label="Taylor Swift promotional portrait from the 1989 era">
           <span class="hero-sticker">songwriter<br />storyteller<br />sparkle</span>
@@ -188,6 +197,7 @@
           </div>
           <p>Each card is a starting point, with a quick mood check and one essential track to put on first.</p>
         </div>
+        <!-- Album cards act like a quick table of contents for the discography. -->
         <div class="album-grid">
           <article class="album debut"><span class="year">2006 / COUNTRY ROOTS</span><h3>Taylor Swift</h3><p>Small-town scenes and first crushes. Start with: “Tim McGraw.”</p></article>
           <article class="album fearless"><span class="year">2008 / GOLDEN &amp; FEARLESS</span><h3>Fearless</h3><p>Fairy-tale heartache and fearless joy. Start with: “Love Story.”</p></article>
@@ -210,6 +220,7 @@
           <h2 class="section-title" id="songs-title">Press play here.</h2>
           <p>For a first pass through the eras, these five songs show the range: sparkling romance, devastating writing, synth-pop confidence, and secret storybook worlds.</p>
         </div>
+        <!-- Starter tracks keep the page useful for someone new to the catalog. -->
         <ol class="song-list">
           <li><span class="number">01</span><strong>Love Story</strong><span>Fearless</span></li>
           <li><span class="number">02</span><strong>All Too Well</strong><span>Red</span></li>
