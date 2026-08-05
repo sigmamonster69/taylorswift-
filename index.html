@@ -1,135 +1,321 @@
 <!DOCTYPE html>
+<!-- 
+  ===================================================================
+  TAYLOR SWIFT FAN PAGE - EDUCATIONAL HTML/CSS BREAKDOWN
+  ===================================================================
+  
+  This file demonstrates modern HTML5 and CSS3 techniques including:
+  - Semantic HTML elements (header, main, section, article, nav, footer)
+  - CSS Custom Properties (variables) for theming
+  - CSS Grid and Flexbox for layouts
+  - Responsive design with media queries
+  - Pseudo-elements (::before, ::after) for decorative effects
+  - CSS gradients for backgrounds and overlays
+  - Accessibility features (aria-labels, proper heading hierarchy)
+  
+  STRUCTURE OVERVIEW:
+  1. HEAD: Meta tags, title, and all CSS styles
+  2. BODY: 
+     - Header (logo + navigation)
+     - Main Content:
+       * Hero Section (introduction with image)
+       * Intro Section (about the artist)
+       * Albums Section (grid of album cards)
+       * Songs Section (starter playlist)
+       * Finale Section (closing statement)
+     - Footer (credits)
+  ===================================================================
+-->
 <html lang="en">
   <head>
+    <!-- Character encoding: ensures special characters display correctly -->
     <meta charset="UTF-8" />
+    
+    <!-- Viewport meta tag: makes the page responsive on mobile devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Theme color: sets the browser UI color on mobile (pink for this site) -->
     <meta name="theme-color" content="#ff6cac" />
+    
+    <!-- Page title: appears in browser tab and search results -->
     <title>Taylor Swift | The Eras Edit</title>
+    
+    <!-- Meta description: shown in search engine results -->
     <meta name="description" content="A pink Taylor Swift fan guide to the albums, eras, and essential songs." />
+    
+    <!-- 
+      INTERNAL CSS STYLESHEET
+      All styles are embedded in the <style> tag instead of an external file.
+      This is common for single-page sites or prototypes.
+    -->
     <style>
+      /* 
+        IMPORT GOOGLE FONTS
+        Loads two fonts from Google Fonts CDN:
+        - DM Mono: A monospace font for body text
+        - Playfair Display: A decorative serif font for headings
+      */
       @import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap");
 
-      /* Global palette variables keep the whole page visually consistent. */
+      /* 
+        CSS CUSTOM PROPERTIES (VARIABLES)
+        Defined in :root so they're available globally.
+        This makes it easy to change the color scheme in one place.
+      */
       :root {
-        --ink: #3c1730;
-        --cream: #fff7fa;
-        --pink: #ff64a7;
-        --hot-pink: #e93486;
-        --peach: #ffceb8;
-        --lilac: #d9ccff;
-        --paper: rgba(255, 255, 255, 0.78);
-        --line: rgba(93, 30, 68, 0.16);
-        --shadow: 0 18px 46px rgba(174, 49, 113, 0.17);
+        --ink: #3c1730;           /* Dark purple-brown for text */
+        --cream: #fff7fa;         /* Light pink-white for backgrounds */
+        --pink: #ff64a7;          /* Medium pink for accents */
+        --hot-pink: #e93486;      /* Vibrant pink for highlights */
+        --peach: #ffceb8;         /* Soft peach for decorations */
+        --lilac: #d9ccff;         /* Light purple for variety */
+        --paper: rgba(255, 255, 255, 0.78);  /* Semi-transparent white */
+        --line: rgba(93, 30, 68, 0.16);      /* Subtle border color */
+        --shadow: 0 18px 46px rgba(174, 49, 113, 0.17);  /* Drop shadow */
       }
 
-      * { box-sizing: border-box; }
+      /* 
+        RESET & BASE STYLES
+        '*' selects ALL elements - this ensures consistent box sizing
+      */
+      * { box-sizing: border-box; }  /* Include padding/border in element width */
+      
+      /* Smooth scrolling when clicking anchor links */
       html { scroll-behavior: smooth; }
+      
+      /* 
+        BODY STYLING
+        Uses multiple layered backgrounds for a gradient effect
+      */
       body {
-        margin: 0;
-        min-width: 320px;
-        color: var(--ink);
-        font-family: "DM Mono", monospace;
+        margin: 0;  /* Remove default browser margin */
+        min-width: 320px;  /* Prevent layout from getting too narrow */
+        color: var(--ink);  /* Use custom property for text color */
+        font-family: "DM Mono", monospace;  /* Monospace font for body */
+        
+        /* 
+          LAYERED BACKGROUNDS (bottom to top):
+          1. Linear gradient base
+          2. Two radial gradients for soft color spots
+        */
         background:
           radial-gradient(circle at 8% 4%, rgba(255, 201, 225, 0.95), transparent 23rem),
           radial-gradient(circle at 92% 18%, rgba(255, 218, 188, 0.92), transparent 24rem),
           linear-gradient(130deg, #fff9fc 0%, #fff1f7 45%, #ffe9f2 100%);
       }
-      a { color: inherit; }
+      
+      a { color: inherit; }  /* Links inherit parent text color */
+      
+      /* 
+        .shell - CONTAINER UTILITY
+        Centers content and limits maximum width
+        'min()' chooses the smaller value for responsive sizing
+      */
       .shell { width: min(1180px, calc(100% - 36px)); margin: 0 auto; }
+      
+      /* 
+        .eyebrow - SMALL UPPERCASE LABEL
+        Common design pattern for section labels above headings
+      */
       .eyebrow { color: var(--hot-pink); font-size: 0.71rem; letter-spacing: 0.16em; text-transform: uppercase; }
 
-      /* Header stays simple so the hero section gets most of the attention. */
+      /* 
+        HEADER SECTION
+        Uses Flexbox for horizontal layout with space between logo and nav
+      */
       .site-header { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; }
+      
+      /* Logo styling with decorative font */
       .logo { color: var(--hot-pink); font-family: "Playfair Display", Georgia, serif; font-size: 1.43rem; font-style: italic; font-weight: 800; text-decoration: none; }
+      
+      /* Navigation uses flexbox for horizontal link arrangement */
       .site-header nav { display: flex; gap: 20px; font-size: 0.73rem; letter-spacing: 0.08em; text-transform: uppercase; }
       .site-header nav a { text-decoration: none; }
-      .site-header nav a:hover { color: var(--hot-pink); }
+      .site-header nav a:hover { color: var(--hot-pink); }  /* Hover effect */
 
-      /* The hero is split into text on the left and image on the right. */
+      /* 
+        HERO SECTION - CSS GRID LAYOUT
+        Splits into two columns: text (left) and image (right)
+      */
       .hero {
-        display: grid;
-        grid-template-columns: 1.05fr 0.95fr;
-        min-height: 590px;
-        overflow: hidden;
-        border: 1px solid rgba(255,255,255,.72);
-        border-radius: 30px;
-        background: var(--paper);
-        box-shadow: var(--shadow);
+        display: grid;  /* Enable CSS Grid */
+        grid-template-columns: 1.05fr 0.95fr;  /* Two columns, slightly wider left */
+        min-height: 590px;  /* Minimum height */
+        overflow: hidden;  /* Clip content that exceeds bounds */
+        border: 1px solid rgba(255,255,255,.72);  /* Subtle white border */
+        border-radius: 30px;  /* Rounded corners */
+        background: var(--paper);  /* Semi-transparent white */
+        box-shadow: var(--shadow);  /* Drop shadow from variable */
       }
+      
+      /* Left side of hero: text content aligned to bottom */
       .hero-copy { display: flex; flex-direction: column; justify-content: flex-end; padding: clamp(30px, 6vw, 76px); }
+      
+      /* Reset default margins on typography */
       h1, h2, h3, p { margin-top: 0; }
+      
+      /* 
+        MAIN HEADING (h1)
+        - clamp() provides responsive font sizing
+        - 'ch' unit = width of the character "0"
+      */
       h1 { max-width: 8ch; margin-bottom: 20px; font-family: "Playfair Display", Georgia, serif; font-size: clamp(3.7rem, 8vw, 7.1rem); font-style: italic; letter-spacing: -0.065em; line-height: .82; }
+      
+      /* Paragraph with max-width for readability */
       .hero-copy p { max-width: 48ch; font-size: .92rem; line-height: 1.8; }
+      
+      /* Button container using flexbox */
       .hero-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+      
+      /* 
+        PILL BUTTONS
+        - Border-radius: 999px creates fully rounded ends
+        - Transition enables smooth hover animations
+      */
       .pill { display: inline-block; padding: 12px 16px; border: 1px solid var(--ink); border-radius: 999px; font-size: .74rem; letter-spacing: .04em; text-decoration: none; transition: transform .2s ease, background .2s ease; }
-      .pill:hover { transform: translateY(-3px); background: var(--pink); }
-      .pill.filled { border-color: var(--hot-pink); background: var(--hot-pink); color: white; }
+      .pill:hover { transform: translateY(-3px); background: var(--pink); }  /* Lift and color on hover */
+      .pill.filled { border-color: var(--hot-pink); background: var(--hot-pink); color: white; }  /* Filled variant */
+      
+      /* Decorative badge image */
       .hero-badge {
         width: min(220px, 100%);
         margin-top: 28px;
         border-radius: 20px;
         box-shadow: 0 14px 30px rgba(174, 49, 113, 0.16);
       }
+      
+      /* 
+        HERO IMAGE AREA
+        Uses ::before pseudo-element for background overlay
+      */
       .hero-photo { position: relative; min-height: 470px; background: #f7a2c9; }
+      
+      /* 
+        PSEUDO-ELEMENT (::before)
+        Creates a layer over the image with gradient overlay
+        'inset: 0' is shorthand for top/right/bottom/left: 0
+      */
       .hero-photo::before { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255, 69, 151, .12), rgba(84, 13, 48, .22)), url("Taylor_Swift_-_1989.png") center 26% / cover; content: ""; filter: saturate(1.12); }
+      
+      /* 
+        CIRCULAR BADGE
+        Positioned absolutely within the hero photo area
+      */
       .hero-sticker { position: absolute; top: 30px; right: 28px; width: 130px; height: 130px; display: grid; place-items: center; border-radius: 50%; background: var(--peach); color: var(--hot-pink); font-size: .65rem; font-weight: 500; letter-spacing: .08em; line-height: 1.55; text-align: center; text-transform: uppercase; transform: rotate(12deg); }
+      
+      /* Bottom caption overlay with gradient fade */
       .hero-note { position: absolute; right: 0; bottom: 0; left: 0; padding: 24px 28px; color: white; background: linear-gradient(transparent, rgba(58, 13, 38, .76)); font-size: .67rem; letter-spacing: .12em; text-transform: uppercase; }
 
-      /* Two-column intro section explains the site before the album grid starts. */
+      /* 
+        INTRO SECTION - TWO COLUMN GRID
+        Different proportions than hero (.9fr left, 1.1fr right)
+      */
       .intro { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; padding: 92px 0; align-items: start; }
+      
+      /* Reusable section title style (used across multiple sections) */
       .section-title { font-family: "Playfair Display", Georgia, serif; font-size: clamp(2.5rem, 5vw, 4.8rem); letter-spacing: -.055em; line-height: .94; }
       .intro p { max-width: 58ch; font-size: .89rem; line-height: 1.9; }
+      
+      /* 
+        FAST FACTS - 3-COLUMN GRID
+        'repeat(3, 1fr)' creates three equal columns
+      */
       .fast-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
       .fact { padding: 18px 12px; border-top: 1px solid var(--ink); }
       .fact strong { display: block; margin-bottom: 7px; color: var(--hot-pink); font-family: "Playfair Display", Georgia, serif; font-size: 2.1rem; }
       .fact span { font-size: .66rem; line-height: 1.5; }
 
-      /* Album cards act like a compact visual index of the discography. */
+      /* 
+        ALBUMS SECTION
+        Grid of album cards with individual color themes
+      */
       .albums { padding: 76px 0 88px; }
       .albums-top { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 27px; }
       .albums-top p { max-width: 44ch; margin: 0; font-size: .78rem; line-height: 1.7; }
+      
+      /* 3-column grid for album cards */
       .album-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+      
+      /* 
+        ALBUM CARD
+        Complex styling with multiple pseudo-elements for effects
+      */
       .album { min-height: 350px; display: flex; flex-direction: column; justify-content: flex-end; padding: 23px; overflow: hidden; position: relative; border-radius: 22px; box-shadow: var(--shadow); color: white; isolation: isolate; }
+      
+      /* 
+        PSEUDO-ELEMENTS FOR CARD EFFECTS
+        ::before = colored background gradient (specific to each album)
+        ::after = dark overlay gradient for text readability
+      */
       .album::before { position: absolute; z-index: -2; inset: 0; content: ""; transition: transform .4s ease; }
       .album::after { position: absolute; z-index: -1; inset: 0; background: linear-gradient(180deg, transparent 30%, rgba(39, 12, 29, .86)); content: ""; }
+      
+      /* Zoom effect on hover */
       .album:hover::before { transform: scale(1.07); }
+      
       .album .year { margin-bottom: 7px; font-size: .68rem; letter-spacing: .14em; }
       .album h3 { margin-bottom: 9px; font-family: "Playfair Display", Georgia, serif; font-size: 2.35rem; font-style: italic; letter-spacing: -.045em; line-height: .9; }
       .album p { margin: 0; font-size: .7rem; line-height: 1.65; }
-      .album.debut::before { background: linear-gradient(140deg, #77a54e, #e4cf6d 42%, #437c4b); }
-      .album.fearless::before { background: linear-gradient(145deg, #cba35a, #fae6a3 45%, #916b31); }
-      .album.speaknow::before { background: linear-gradient(145deg, #5e267a, #bd8bda 47%, #40205b); }
-      .album.red::before { background: linear-gradient(145deg, #58182c, #d84e5d 46%, #ad1e3e); }
-      .album.nineteen::before { background: linear-gradient(145deg, #4fb5df, #d9f2f7 47%, #60a4c1); }
-      .album.reputation::before { background: linear-gradient(145deg, #141419, #8d8d93 48%, #2b2a2d); }
-      .album.lover::before { background: linear-gradient(145deg, #7ed7ed, #ffa2cc 50%, #c07cd3); }
-      .album.folklore::before { background: linear-gradient(145deg, #323437, #a8a8a4 47%, #59595a); }
-      .album.evermore::before { background: linear-gradient(145deg, #7f5538, #cf9771 45%, #63422f); }
-      .album.midnights::before { background: linear-gradient(145deg, #172452, #5269a7 46%, #2d3159); }
-      .album.tortured::before { background: linear-gradient(145deg, #e5e1d9, #aaa69f 45%, #4b4a49); }
-      .album.eras::before { background: linear-gradient(145deg, #f184bc, #ffc5df 46%, #8c4b9c); }
+      
+      /* 
+        ALBUM-SPECIFIC COLOR THEMES
+        Each class applies a unique gradient matching the album aesthetic
+      */
+      .album.debut::before { background: linear-gradient(140deg, #77a54e, #e4cf6d 42%, #437c4b); }  /* Green/gold country */
+      .album.fearless::before { background: linear-gradient(145deg, #cba35a, #fae6a3 45%, #916b31); }  /* Gold */
+      .album.speaknow::before { background: linear-gradient(145deg, #5e267a, #bd8bda 47%, #40205b); }  /* Purple */
+      .album.red::before { background: linear-gradient(145deg, #58182c, #d84e5d 46%, #ad1e3e); }  /* Red */
+      .album.nineteen::before { background: linear-gradient(145deg, #4fb5df, #d9f2f7 47%, #60a4c1); }  /* Blue */
+      .album.reputation::before { background: linear-gradient(145deg, #141419, #8d8d93 48%, #2b2a2d); }  /* Black/gray */
+      .album.lover::before { background: linear-gradient(145deg, #7ed7ed, #ffa2cc 50%, #c07cd3); }  /* Pastel rainbow */
+      .album.folklore::before { background: linear-gradient(145deg, #323437, #a8a8a4 47%, #59595a); }  /* Gray/forest */
+      .album.evermore::before { background: linear-gradient(145deg, #7f5538, #cf9771 45%, #63422f); }  /* Brown/amber */
+      .album.midnights::before { background: linear-gradient(145deg, #172452, #5269a7 46%, #2d3159); }  /* Midnight blue */
+      .album.tortured::before { background: linear-gradient(145deg, #e5e1d9, #aaa69f 45%, #4b4a49); }  /* Typewriter gray */
+      .album.eras::before { background: linear-gradient(145deg, #f184bc, #ffc5df 46%, #8c4b9c); }  /* Pink/purple tour */
 
-      /* The song list works like a starter playlist for new listeners. */
+      /* 
+        SONGS SECTION
+        Two-column layout with styled list
+      */
       .songs { display: grid; grid-template-columns: .85fr 1.15fr; gap: 38px; padding: 84px 0; border-top: 1px solid var(--line); }
       .songs p { max-width: 40ch; font-size: .83rem; line-height: 1.8; }
+      
+      /* Custom ordered list styling */
       .song-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--ink); }
+      
+      /* 
+        LIST ITEMS WITH CSS GRID
+        Three columns: number, song title, album name
+      */
       .song-list li { display: grid; grid-template-columns: 42px 1fr auto; gap: 14px; align-items: center; padding: 17px 0; border-bottom: 1px solid var(--line); }
       .song-list .number { color: var(--hot-pink); font-size: .72rem; }
       .song-list strong { font-family: "Playfair Display", Georgia, serif; font-size: 1.3rem; font-style: italic; }
       .song-list span { font-size: .66rem; text-align: right; }
 
-      /* Finale panel closes the page with a short project note. */
+      /* 
+        FINALE SECTION
+        Pink closing panel with decorative circle element
+      */
       .finale { margin-bottom: 50px; padding: clamp(30px, 6vw, 70px); border-radius: 28px; background: var(--hot-pink); color: white; overflow: hidden; position: relative; }
+      
+      /* Decorative circle using ::after pseudo-element */
       .finale::after { position: absolute; right: -75px; bottom: -115px; width: 340px; height: 340px; border: 34px solid rgba(255, 216, 234, .34); border-radius: 50%; content: ""; }
       .finale h2 { max-width: 10ch; margin-bottom: 18px; font-family: "Playfair Display", Georgia, serif; font-size: clamp(2.6rem, 5vw, 5rem); font-style: italic; letter-spacing: -.055em; line-height: .9; }
       .finale p { position: relative; z-index: 1; max-width: 54ch; font-size: .8rem; line-height: 1.8; }
+      
+      /* Site footer */
       footer { padding: 0 0 30px; color: rgba(60, 23, 48, .7); font-size: .65rem; line-height: 1.7; text-align: center; }
 
+      /* 
+        RESPONSIVE DESIGN - MEDIA QUERIES
+        Adjust layout for tablets (850px) and phones (560px)
+      */
       @media (max-width: 850px) {
-        .hero, .intro, .songs { grid-template-columns: 1fr; }
+        .hero, .intro, .songs { grid-template-columns: 1fr; }  /* Stack to single column */
         .hero-copy { min-height: 470px; }
         .hero-photo { min-height: 470px; }
-        .album-grid { grid-template-columns: repeat(2, 1fr); }
+        .album-grid { grid-template-columns: repeat(2, 1fr); }  /* 2 columns instead of 3 */
       }
       @media (max-width: 560px) {
         .shell { width: min(100% - 22px, 1180px); }
@@ -140,20 +326,53 @@
         .hero-photo { min-height: 390px; }
         .hero-sticker { top: 18px; right: 18px; width: 102px; height: 102px; font-size: .54rem; }
         .intro, .albums, .songs { padding: 58px 0; }
-        .fast-facts { grid-template-columns: 1fr; }
+        .fast-facts { grid-template-columns: 1fr; }  /* Stack facts vertically */
         .albums-top { display: block; }
         .albums-top p { margin-top: 14px; }
-        .album-grid { grid-template-columns: 1fr; }
+        .album-grid { grid-template-columns: 1fr; }  /* Single column for albums */
         .album { min-height: 285px; }
       }
     </style>
   </head>
   <body>
-    <!-- CTF note: the challenge flag remains in source comments on purpose. -->
+    <!-- 
+      CTF NOTE: The challenge flag is intentionally hidden in source comments.
+      This is a common technique in Capture The Flag (CTF) challenges.
+    -->
     <!-- uahCTF{out_of_style} -->
-    <!-- Decorative page art: the hero uses the Taylor Swift PNG already in the repo. -->
+    
+    <!-- 
+      PAGE STRUCTURE OVERVIEW:
+      
+      The body is organized into semantic sections:
+      1. HEADER - Contains logo and navigation
+      2. MAIN - Primary content with multiple sections:
+         - Hero (introduction)
+         - Intro (about section)
+         - Albums (grid of album cards)
+         - Songs (starter playlist)
+         - Finale (closing statement)
+      3. FOOTER - Credits and legal text
+      
+      Semantic HTML5 elements improve:
+      - Accessibility (screen readers understand the structure)
+      - SEO (search engines better index the content)
+      - Code maintainability (easier to read and modify)
+    -->
     <header class="site-header shell">
       <a class="logo" href="#top">Taylor Swift</a>
+      <nav aria-label="Main navigation">
+        <a href="#about">The artist</a>
+    <!-- 
+      HEADER SECTION
+      <header> element contains site branding and navigation
+      'shell' class centers and constrains width
+    -->
+    <header class="site-header shell">
+      <!-- Logo link that returns to top of page -->
+      <a class="logo" href="#top">Taylor Swift</a>
+      
+      <!-- Navigation with aria-label for accessibility -->
       <nav aria-label="Main navigation">
         <a href="#about">The artist</a>
         <a href="#albums">Albums</a>
@@ -161,35 +380,73 @@
       </nav>
     </header>
 
+    <!-- 
+      MAIN CONTENT AREA
+      <main> contains the primary content unique to this page
+      id="top" serves as anchor target for "back to top" links
+    -->
     <main id="top">
-      <!-- Hero: first impression and navigation entry point. -->
+      <!-- 
+        HERO SECTION
+        First thing visitors see - makes a strong visual impression
+        
+        aria-labelledby connects this section to its heading (h1)
+        This helps screen reader users understand the section's purpose
+      -->
       <section class="hero shell" aria-labelledby="hero-title">
+        <!-- Left column: text content -->
         <div class="hero-copy">
+          <!-- Eyebrow label (small uppercase text above main heading) -->
           <span class="eyebrow">The Eras Edit / a fan guide</span>
+          
+          <!-- Main page heading (h1) -->
           <h1 id="hero-title">Meet me at midnight.</h1>
+          
+          <!-- Descriptive paragraph -->
           <p>A bright, pink celebration of Taylor Swift's songwriting, eras, and the songs that make each album feel like its own little world.</p>
+          
+          <!-- Call-to-action buttons using pill button style -->
           <div class="hero-links">
             <a class="pill filled" href="#albums">Pick an era</a>
             <a class="pill" href="#songs">Find your first song</a>
           </div>
-          <!-- New local PNG accent to make the fan page feel more like a poster. -->
+          
+          <!-- Decorative badge image with alt text for accessibility -->
           <img class="hero-badge" src="eras-badge.png" alt="Pink Taylor Swift inspired badge with sparkles and a heart" />
         </div>
+        
+        <!-- Right column: image area with decorative elements -->
+        <!-- role="img" tells assistive tech this div functions as an image -->
         <div class="hero-photo" role="img" aria-label="Taylor Swift promotional portrait from the 1989 era">
+          <!-- Circular sticker badge positioned absolutely -->
           <span class="hero-sticker">songwriter<br />storyteller<br />sparkle</span>
+          
+          <!-- Bottom caption with gradient fade overlay -->
           <div class="hero-note">Taylor Swift / 11 studio albums and counting</div>
         </div>
       </section>
 
-      <!-- Intro: explain the concept before diving into the album cards. -->
+      <!-- 
+        INTRO SECTION
+        Explains the site concept before showing album grid
+        
+        Uses two-column grid layout:
+        - Left: Section title
+        - Right: Descriptive text and fast facts
+      -->
       <section class="intro shell" id="about">
+        <!-- Left column: eyebrow and heading -->
         <div>
           <span class="eyebrow">Why she matters</span>
           <h2 class="section-title">Every era tells a different story.</h2>
         </div>
+        
+        <!-- Right column: paragraphs and facts grid -->
         <div>
           <p>Taylor Swift is a singer-songwriter known for turning sharp details into unforgettable pop moments. From country beginnings to stadium-ready pop, indie folk, and late-night confessionals, her catalog has a doorway for every mood.</p>
           <p>Start with the album color that calls to you, then follow the songs. There is no wrong order: this is a discography built for revisiting.</p>
+          
+          <!-- Fast facts displayed in 3-column grid -->
           <div class="fast-facts" aria-label="Taylor Swift facts">
             <div class="fact"><strong>11</strong><span>studio albums across country, pop, folk, and more</span></div>
             <div class="fact"><strong>14</strong><span>Grammy Awards, including four Album of the Year wins</span></div>
@@ -198,8 +455,17 @@
         </div>
       </section>
 
-      <!-- Albums: quick skim-friendly cards for each Taylor Swift era. -->
+      <!-- 
+        ALBUMS SECTION
+        Grid of album cards representing each Taylor Swift era
+        
+        Each card uses:
+        - ::before pseudo-element for colored background gradient
+        - ::after pseudo-element for dark overlay (text readability)
+        - Hover effect that scales the background
+      -->
       <section class="albums shell" id="albums" aria-labelledby="albums-title">
+        <!-- Section header with title and description -->
         <div class="albums-top">
           <div>
             <span class="eyebrow">Album library</span>
@@ -207,31 +473,44 @@
           </div>
           <p>Each card is a starting point, with a quick mood check and one essential track to put on first.</p>
         </div>
-        <!-- Album cards act like a quick table of contents for the discography. -->
+        
+        <!-- 3-column grid of album cards -->
         <div class="album-grid">
-          <article class="album debut"><span class="year">2006 / COUNTRY ROOTS</span><h3>Taylor Swift</h3><p>Small-town scenes and first crushes. Start with: “Tim McGraw.”</p></article>
-          <article class="album fearless"><span class="year">2008 / GOLDEN &amp; FEARLESS</span><h3>Fearless</h3><p>Fairy-tale heartache and fearless joy. Start with: “Love Story.”</p></article>
-          <article class="album speaknow"><span class="year">2010 / PURPLE &amp; UNFILTERED</span><h3>Speak Now</h3><p>Big feelings, bigger gowns, all self-written. Start with: “Enchanted.”</p></article>
-          <article class="album red"><span class="year">2012 / AUTUMN HEARTBREAK</span><h3>Red</h3><p>Messy, vivid, and emotionally cinematic. Start with: “All Too Well.”</p></article>
-          <article class="album nineteen"><span class="year">2014 / CITY LIGHTS</span><h3>1989</h3><p>Polaroids, pop hooks, and a clean new sound. Start with: “Style.”</p></article>
-          <article class="album reputation"><span class="year">2017 / DARK GLAMOUR</span><h3>reputation</h3><p>Sharp edges with a soft center. Start with: “Delicate.”</p></article>
-          <article class="album lover"><span class="year">2019 / PINK DAYDREAM</span><h3>Lover</h3><p>Glitter pens, sunsets, and open-hearted pop. Start with: “Cruel Summer.”</p></article>
-          <article class="album folklore"><span class="year">2020 / WOODLAND TALES</span><h3>folklore</h3><p>Quiet stories that reward close listening. Start with: “august.”</p></article>
-          <article class="album evermore"><span class="year">2020 / AMBER &amp; EVERGREEN</span><h3>evermore</h3><p>Complicated characters and wintery folklore. Start with: “willow.”</p></article>
-          <article class="album midnights"><span class="year">2022 / MIDNIGHT CONFESSIONS</span><h3>Midnights</h3><p>Restless thoughts turned into glittering pop. Start with: “Maroon.”</p></article>
-          <article class="album tortured"><span class="year">2024 / TYPEWRITER HEARTBREAK</span><h3>The Tortured Poets Department</h3><p>Black-and-white confessionals with a restless pulse. Start with: “Down Bad.”</p></article>
+          <!-- Each <article> represents one album -->
+          <article class="album debut"><span class="year">2006 / COUNTRY ROOTS</span><h3>Taylor Swift</h3><p>Small-town scenes and first crushes. Start with: "Tim McGraw."</p></article>
+          <article class="album fearless"><span class="year">2008 / GOLDEN &amp; FEARLESS</span><h3>Fearless</h3><p>Fairy-tale heartache and fearless joy. Start with: "Love Story."</p></article>
+          <article class="album speaknow"><span class="year">2010 / PURPLE &amp; UNFILTERED</span><h3>Speak Now</h3><p>Big feelings, bigger gowns, all self-written. Start with: "Enchanted."</p></article>
+          <article class="album red"><span class="year">2012 / AUTUMN HEARTBREAK</span><h3>Red</h3><p>Messy, vivid, and emotionally cinematic. Start with: "All Too Well."</p></article>
+          <article class="album nineteen"><span class="year">2014 / CITY LIGHTS</span><h3>1989</h3><p>Polaroids, pop hooks, and a clean new sound. Start with: "Style."</p></article>
+          <article class="album reputation"><span class="year">2017 / DARK GLAMOUR</span><h3>reputation</h3><p>Sharp edges with a soft center. Start with: "Delicate."</p></article>
+          <article class="album lover"><span class="year">2019 / PINK DAYDREAM</span><h3>Lover</h3><p>Glitter pens, sunsets, and open-hearted pop. Start with: "Cruel Summer."</p></article>
+          <article class="album folklore"><span class="year">2020 / WOODLAND TALES</span><h3>folklore</h3><p>Quiet stories that reward close listening. Start with: "august."</p></article>
+          <article class="album evermore"><span class="year">2020 / AMBER &amp; EVERGREEN</span><h3>evermore</h3><p>Complicated characters and wintery folklore. Start with: "willow."</p></article>
+          <article class="album midnights"><span class="year">2022 / MIDNIGHT CONFESSIONS</span><h3>Midnights</h3><p>Restless thoughts turned into glittering pop. Start with: "Maroon."</p></article>
+          <article class="album tortured"><span class="year">2024 / TYPEWRITER HEARTBREAK</span><h3>The Tortured Poets Department</h3><p>Black-and-white confessionals with a restless pulse. Start with: "Down Bad."</p></article>
           <article class="album eras"><span class="year">THE WHOLE STORY</span><h3>The Eras Tour</h3><p>A reminder that every album is part of the show. Start wherever you are.</p></article>
         </div>
       </section>
 
-      <!-- Songs: a starter playlist to help new listeners begin. -->
+      <!-- 
+        SONGS SECTION
+        Starter playlist for new listeners
+        
+        Uses custom ordered list styling with CSS Grid:
+        - Column 1: Track number (pink)
+        - Column 2: Song title (decorative font)
+        - Column 3: Album name (right-aligned)
+      -->
       <section class="songs shell" id="songs" aria-labelledby="songs-title">
+        <!-- Left column: section introduction -->
         <div>
           <span class="eyebrow">A five-song starter pack</span>
           <h2 class="section-title" id="songs-title">Press play here.</h2>
           <p>For a first pass through the eras, these five songs show the range: sparkling romance, devastating writing, synth-pop confidence, and secret storybook worlds.</p>
         </div>
-        <!-- Starter tracks keep the page useful for someone new to the catalog. -->
+        
+        <!-- Right column: numbered song list -->
+        <!-- Custom list styling removes default numbers, uses grid instead -->
         <ol class="song-list">
           <li><span class="number">01</span><strong>Love Story</strong><span>Fearless</span></li>
           <li><span class="number">02</span><strong>All Too Well</strong><span>Red</span></li>
@@ -241,7 +520,13 @@
         </ol>
       </section>
 
-      <!-- Closing note: keeps the challenge context visible at the end. -->
+      <!-- 
+        FINALE SECTION
+        Closing statement with decorative circular element
+        
+        Uses ::after pseudo-element to create the decorative circle
+        positioned partially outside the container for visual interest
+      -->
       <section class="finale shell">
         <span class="eyebrow" style="color:#ffe0ee">For the record</span>
         <h2>Long live all the magic we made.</h2>
@@ -249,6 +534,13 @@
       </section>
     </main>
 
+    <!-- 
+      FOOTER
+      Contains credits and legal disclaimer
+      
+      Note: Footer is outside <main> because it's site-wide content,
+      not part of the page's primary unique content
+    -->
     <footer class="shell">Unofficial fan project for a university CTF challenge. Taylor Swift imagery is used here only for the challenge's fan-page concept.</footer>
   </body>
 </html>
