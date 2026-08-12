@@ -6,6 +6,6 @@ It includes a pink, responsive page with a Taylor Swift hero image, a guide to h
 
 This is an unofficial student project. Taylor Swift names and imagery belong to their respective owners.
 
-## Credits
-
+## Credits 
+fuck it 
 Created and maintained as a university CTF project by the repository owner.
