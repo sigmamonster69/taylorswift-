@@ -8,4 +8,4 @@ This is an unofficial student project. Taylor Swift names and imagery belong to 
 
 ## Credits
 I made a new one to edit and larp 
-Created and maintained as a university CTF project by the repository owner.
+Created and maintained by me to help better the future of the cyber security club
