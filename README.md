@@ -1,10 +1,10 @@
-# Taylor Swift: The Eras Edit
+# Taylor Swift: The Eras Edit 🎵✨
 
-A small Taylor Swift-themed fan site made as a university CTF challenge.
+A vibrant, pink-themed Taylor Swift fan site created as a university CTF (Capture The Flag) challenge. Explore Taylor's musical journey through her iconic eras with a responsive, beautifully designed interface.
 
-It includes a pink, responsive page with a Taylor Swift hero image, a guide to her studio-album eras, and starter song recommendations for new listeners. The CTF flag is intentionally placed in the HTML source comments.
+![Taylor Swift Eras Badge](eras-badge.png)
 
-This is an unofficial student project. Taylor Swift names and imagery belong to their respective owners.
+## 🌟 Features
 
 ## Credits 
 fuck it test 23 
