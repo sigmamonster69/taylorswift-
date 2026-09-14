@@ -4,26 +4,40 @@
   TAYLOR SWIFT FAN PAGE - EDUCATIONAL HTML/CSS BREAKDOWN
   ===================================================================
   
-  This file demonstrates modern HTML5 and CSS3 techniques including:
-  - Semantic HTML elements (header, main, section, article, nav, footer)
-  - CSS Custom Properties (variables) for theming
-  - CSS Grid and Flexbox for layouts
-  - Responsive design with media queries
-  - Pseudo-elements (::before, ::after) for decorative effects
-  - CSS gradients for backgrounds and overlays
-  - Accessibility features (aria-labels, proper heading hierarchy)
+  PROJECT OVERVIEW:
+  This is a single-page fan site celebrating Taylor Swift's discography.
+  It demonstrates modern front-end development techniques while maintaining
+  excellent accessibility and responsive design principles.
   
-  STRUCTURE OVERVIEW:
-  1. HEAD: Meta tags, title, and all CSS styles
-  2. BODY: 
-     - Header (logo + navigation)
+  KEY FEATURES DEMONSTRATED:
+  ✓ Semantic HTML5 elements (header, main, section, article, nav, footer)
+  ✓ CSS Custom Properties (variables) for maintainable theming
+  ✓ CSS Grid for complex two-dimensional layouts
+  ✓ Flexbox for one-dimensional component layouts
+  ✓ Mobile-first responsive design with media queries
+  ✓ Pseudo-elements (::before, ::after) for decorative effects
+  ✓ CSS gradients (linear, radial) for rich backgrounds
+  ✓ Accessibility features (ARIA labels, proper heading hierarchy, alt text)
+  ✓ Smooth scroll behavior and hover animations
+  
+  FILE STRUCTURE:
+  1. HEAD SECTION (lines 30-336):
+     - Meta tags for SEO and mobile optimization
+     - Google Fonts imports
+     - Complete internal stylesheet
+  
+  2. BODY SECTION (lines 337-534):
+     - Header: Logo + navigation menu
      - Main Content:
-       * Hero Section (introduction with image)
-       * Intro Section (about the artist)
-       * Albums Section (grid of album cards)
-       * Songs Section (starter playlist)
-       * Finale Section (closing statement)
-     - Footer (credits)
+       * Hero Section: Eye-catching introduction with image
+       * Intro Section: Artist biography and quick facts
+       * Albums Section: 12 album cards in a responsive grid
+       * Songs Section: Curated starter playlist
+       * Finale Section: Closing statement
+     - Footer: Credits and disclaimer
+  
+  CTF CHALLENGE NOTE:
+  A hidden flag exists in the source comments - inspect carefully!
   ===================================================================
 -->
 <html lang="en">
@@ -45,22 +59,77 @@
     
     <!-- 
       INTERNAL CSS STYLESHEET
-      All styles are embedded in the <style> tag instead of an external file.
-      This is common for single-page sites or prototypes.
+      ======================
+      All styles are embedded in the <style> tag for this single-page site.
+      
+      CSS ORGANIZATION:
+      1. Font Imports (Google Fonts)
+      2. Custom Properties (CSS Variables) - Color palette & reusable values
+      3. Reset & Base Styles - Consistent defaults across browsers
+      4. Utility Classes - Reusable helper classes (.shell, .eyebrow)
+      5. Header Styles - Logo and navigation
+      6. Hero Section - Main visual introduction with grid layout
+      7. Intro Section - About section with facts grid
+      8. Albums Section - Card grid with hover effects
+      9. Songs Section - Styled list layout
+      10. Finale Section - Closing statement with decorative elements
+      11. Footer Styles - Site credits
+      12. Media Queries - Responsive breakpoints at 850px and 560px
+      
+      TECHNIQUES USED:
+      - CSS Grid for page layouts (hero, intro, albums, songs)
+      - Flexbox for component layouts (header, buttons, nav)
+      - Pseudo-elements (::before, ::after) for decorative overlays
+      - Linear and radial gradients for backgrounds
+      - clamp() for responsive typography
+      - CSS transitions for smooth hover animations
+      - CSS custom properties for theming consistency
     -->
     <style>
       /* 
-        IMPORT GOOGLE FONTS
-        Loads two fonts from Google Fonts CDN:
-        - DM Mono: A monospace font for body text
-        - Playfair Display: A decorative serif font for headings
+        ========================================
+        GOOGLE FONTS IMPORT
+        ========================================
+        Loads two complementary fonts from Google Fonts CDN:
+        
+        1. DM Mono (wght@400;500)
+           - A clean monospace font for body text
+           - Weights: Regular (400), Medium (500)
+           - Used for: Paragraphs, labels, small text
+        
+        2. Playfair Display (ital,wght@0,600;0,700;0,800;1,600)
+           - An elegant decorative serif font for headings
+           - Styles: Regular 600/700/800, Italic 600
+           - Used for: h1, h2, h3, logo, album titles
+           
+        WHY THESE FONTS:
+        The monospace + serif combination creates visual contrast
+        between functional text (DM Mono) and emotional headlines (Playfair).
       */
       @import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap");
 
       /* 
+        ========================================
         CSS CUSTOM PROPERTIES (VARIABLES)
-        Defined in :root so they're available globally.
-        This makes it easy to change the color scheme in one place.
+        ========================================
+        Defined in :root for global accessibility.
+        
+        BENEFITS OF CSS VARIABLES:
+        - Single source of truth for colors and values
+        - Easy theme changes by modifying one location
+        - Consistent design system across the entire site
+        - Can be dynamically updated with JavaScript if needed
+        
+        COLOR PALETTE:
+        --ink: Primary text color (dark purple-brown)
+        --cream: Light background accent
+        --pink: Primary accent color
+        --hot-pink: Vibrant highlight/CTA color
+        --peach: Soft decorative accent
+        --lilac: Secondary accent (purple)
+        --paper: Semi-transparent white for overlays
+        --line: Subtle border/divider color
+        --shadow: Reusable drop shadow value
       */
       :root {
         --ink: #3c1730;           /* Dark purple-brown for text */
@@ -75,28 +144,36 @@
       }
 
       /* 
+        ========================================
         RESET & BASE STYLES
-        '*' selects ALL elements - this ensures consistent box sizing
+        ========================================
+        Establishes consistent defaults across all browsers.
       */
-      * { box-sizing: border-box; }  /* Include padding/border in element width */
       
-      /* Smooth scrolling when clicking anchor links */
+      /* Universal selector - applies box-sizing to ALL elements */
+      * { box-sizing: border-box; }  /* Include padding/border in element width calculations */
+      
+      /* Smooth scrolling for anchor link navigation */
       html { scroll-behavior: smooth; }
       
       /* 
         BODY STYLING
-        Uses multiple layered backgrounds for a gradient effect
+        Uses multiple layered backgrounds for a rich gradient effect.
+        Layers are painted from bottom to top (first listed = bottom layer).
       */
       body {
         margin: 0;  /* Remove default browser margin */
-        min-width: 320px;  /* Prevent layout from getting too narrow */
-        color: var(--ink);  /* Use custom property for text color */
-        font-family: "DM Mono", monospace;  /* Monospace font for body */
+        min-width: 320px;  /* Prevent layout from becoming too narrow on small screens */
+        color: var(--ink);  /* Use custom property for consistent text color */
+        font-family: "DM Mono", monospace;  /* Monospace font for body text */
         
         /* 
-          LAYERED BACKGROUNDS (bottom to top):
-          1. Linear gradient base
-          2. Two radial gradients for soft color spots
+          LAYERED BACKGROUNDS (rendered bottom to top):
+          1. Linear gradient base: Soft pink gradient from top-left to bottom-right
+          2. Radial gradient at 8% 4%: Soft pink spot near top-left
+          3. Radial gradient at 92% 18%: Soft peach spot near top-right
+          
+          This creates depth and visual interest without images.
         */
         background:
           radial-gradient(circle at 8% 4%, rgba(255, 201, 225, 0.95), transparent 23rem),
@@ -104,79 +181,120 @@
           linear-gradient(130deg, #fff9fc 0%, #fff1f7 45%, #ffe9f2 100%);
       }
       
-      a { color: inherit; }  /* Links inherit parent text color */
+      /* Links inherit parent text color for consistency */
+      a { color: inherit; }
       
       /* 
-        .shell - CONTAINER UTILITY
-        Centers content and limits maximum width
-        'min()' chooses the smaller value for responsive sizing
+        ========================================
+        UTILITY CLASSES
+        ========================================
+        Reusable helper classes used throughout the site.
+      */
+      
+      /* 
+        .shell - MAX-WIDTH CONTAINER
+        Centers content horizontally with responsive padding.
+        
+        TECHNIQUE: min() function chooses the smaller value:
+        - 1180px on large screens
+        - calc(100% - 36px) on small screens (leaves 18px padding each side)
+        
+        margin: 0 auto centers the container in its parent.
       */
       .shell { width: min(1180px, calc(100% - 36px)); margin: 0 auto; }
       
       /* 
-        .eyebrow - SMALL UPPERCASE LABEL
-        Common design pattern for section labels above headings
+        .eyebrow - SECTION LABEL
+        Small uppercase text that appears above section headings.
+        
+        DESIGN PATTERN: Eyebrows help users scan content by
+        providing context before the main heading.
       */
       .eyebrow { color: var(--hot-pink); font-size: 0.71rem; letter-spacing: 0.16em; text-transform: uppercase; }
 
       /* 
-        HEADER SECTION
-        Uses Flexbox for horizontal layout with space between logo and nav
+        ========================================
+        HEADER STYLES
+        ========================================
+        Site header with logo and navigation.
+        Uses Flexbox for horizontal layout.
       */
       .site-header { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; }
       
-      /* Logo styling with decorative font */
+      /* Logo: Decorative italic serif font with hot pink color */
       .logo { color: var(--hot-pink); font-family: "Playfair Display", Georgia, serif; font-size: 1.43rem; font-style: italic; font-weight: 800; text-decoration: none; }
       
-      /* Navigation uses flexbox for horizontal link arrangement */
+      /* Navigation: Horizontal row of uppercase links */
       .site-header nav { display: flex; gap: 20px; font-size: 0.73rem; letter-spacing: 0.08em; text-transform: uppercase; }
       .site-header nav a { text-decoration: none; }
-      .site-header nav a:hover { color: var(--hot-pink); }  /* Hover effect */
+      .site-header nav a:hover { color: var(--hot-pink); }  /* Hover: changes to hot pink */
 
       /* 
+        ========================================
         HERO SECTION - CSS GRID LAYOUT
-        Splits into two columns: text (left) and image (right)
+        ========================================
+        The hero is the first visual section visitors see.
+        Uses a two-column CSS Grid layout: text left, image right.
+        
+        KEY TECHNIQUES:
+        - CSS Grid for two-dimensional layout
+        - Fractional units (fr) for flexible column widths
+        - clamp() for responsive padding
+        - Pseudo-elements for decorative overlays
       */
       .hero {
-        display: grid;  /* Enable CSS Grid */
-        grid-template-columns: 1.05fr 0.95fr;  /* Two columns, slightly wider left */
-        min-height: 590px;  /* Minimum height */
-        overflow: hidden;  /* Clip content that exceeds bounds */
+        display: grid;                    /* Enable CSS Grid */
+        grid-template-columns: 1.05fr 0.95fr;  /* Two columns: left slightly wider */
+        min-height: 590px;                /* Minimum height for visual impact */
+        overflow: hidden;                 /* Clip content that exceeds bounds */
         border: 1px solid rgba(255,255,255,.72);  /* Subtle white border */
-        border-radius: 30px;  /* Rounded corners */
-        background: var(--paper);  /* Semi-transparent white */
-        box-shadow: var(--shadow);  /* Drop shadow from variable */
+        border-radius: 30px;              /* Rounded corners for modern look */
+        background: var(--paper);         /* Semi-transparent white background */
+        box-shadow: var(--shadow);        /* Drop shadow from CSS variable */
       }
       
-      /* Left side of hero: text content aligned to bottom */
+      /* 
+        Left column: Text content area
+        Flexbox used to align content to bottom of container.
+        Padding uses clamp() for responsive sizing between 30px and 76px.
+      */
       .hero-copy { display: flex; flex-direction: column; justify-content: flex-end; padding: clamp(30px, 6vw, 76px); }
       
-      /* Reset default margins on typography */
+      /* Reset default margins on typography elements */
       h1, h2, h3, p { margin-top: 0; }
       
       /* 
         MAIN HEADING (h1)
-        - clamp() provides responsive font sizing
-        - 'ch' unit = width of the character "0"
+        =================
+        - max-width: 8ch limits line length to ~8 characters wide
+        - clamp(3.7rem, 8vw, 7.1rem) = responsive font size
+          * Minimum: 3.7rem
+          * Preferred: 8% of viewport width
+          * Maximum: 7.1rem
+        - 'ch' unit = width of character "0" in current font
       */
       h1 { max-width: 8ch; margin-bottom: 20px; font-family: "Playfair Display", Georgia, serif; font-size: clamp(3.7rem, 8vw, 7.1rem); font-style: italic; letter-spacing: -0.065em; line-height: .82; }
       
-      /* Paragraph with max-width for readability */
+      /* Paragraph: Limited width for optimal readability (48 characters) */
       .hero-copy p { max-width: 48ch; font-size: .92rem; line-height: 1.8; }
       
-      /* Button container using flexbox */
+      /* Button container: Flexbox with wrapping for mobile */
       .hero-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
       
       /* 
         PILL BUTTONS
-        - Border-radius: 999px creates fully rounded ends
-        - Transition enables smooth hover animations
+        ============
+        Fully rounded buttons with hover animation.
+        
+        ANIMATION: transition property enables smooth changes:
+        - transform: vertical movement on hover
+        - background: color change on hover
       */
       .pill { display: inline-block; padding: 12px 16px; border: 1px solid var(--ink); border-radius: 999px; font-size: .74rem; letter-spacing: .04em; text-decoration: none; transition: transform .2s ease, background .2s ease; }
-      .pill:hover { transform: translateY(-3px); background: var(--pink); }  /* Lift and color on hover */
-      .pill.filled { border-color: var(--hot-pink); background: var(--hot-pink); color: white; }  /* Filled variant */
+      .pill:hover { transform: translateY(-3px); background: var(--pink); }  /* Lift up + pink background */
+      .pill.filled { border-color: var(--hot-pink); background: var(--hot-pink); color: white; }  /* Solid hot pink variant */
       
-      /* Decorative badge image */
+      /* Decorative badge image with responsive max-width */
       .hero-badge {
         width: min(220px, 100%);
         margin-top: 28px;
@@ -185,40 +303,69 @@
       }
       
       /* 
-        HERO IMAGE AREA
-        Uses ::before pseudo-element for background overlay
+        HERO IMAGE AREA (right column)
+        ==============================
+        Uses ::before pseudo-element for background image + overlay.
+        position: relative establishes containing block for absolute children.
       */
       .hero-photo { position: relative; min-height: 470px; background: #f7a2c9; }
       
       /* 
-        PSEUDO-ELEMENT (::before)
-        Creates a layer over the image with gradient overlay
-        'inset: 0' is shorthand for top/right/bottom/left: 0
+        ::before PSEUDO-ELEMENT
+        Creates a layered background with gradient overlay on top of image.
+        
+        TECHNIQUE BREAKDOWN:
+        - position: absolute + inset: 0 = fills entire parent
+        - Background layers (bottom to top):
+          1. Linear gradient overlay (pink to dark purple)
+          2. Background image centered at 26% from top, cover fit
+        - filter: saturate(1.12) boosts image color vibrancy by 12%
       */
       .hero-photo::before { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255, 69, 151, .12), rgba(84, 13, 48, .22)), url("Taylor_Swift_-_1989.png") center 26% / cover; content: ""; filter: saturate(1.12); }
       
       /* 
-        CIRCULAR BADGE
-        Positioned absolutely within the hero photo area
+        CIRCULAR STICKER BADGE
+        ======================
+        Decorative rotated circle in top-right of hero image.
+        
+        TECHNIQUES:
+        - position: absolute places it relative to .hero-photo
+        - display: grid + place-items: center centers text inside
+        - border-radius: 50% creates perfect circle
+        - transform: rotate(12deg) adds playful tilt
       */
       .hero-sticker { position: absolute; top: 30px; right: 28px; width: 130px; height: 130px; display: grid; place-items: center; border-radius: 50%; background: var(--peach); color: var(--hot-pink); font-size: .65rem; font-weight: 500; letter-spacing: .08em; line-height: 1.55; text-align: center; text-transform: uppercase; transform: rotate(12deg); }
       
-      /* Bottom caption overlay with gradient fade */
+      /* 
+        BOTTOM CAPTION OVERLAY
+        ======================
+        Text overlay at bottom of hero image with gradient fade.
+        Background fades from transparent (top) to dark purple (bottom).
+      */
       .hero-note { position: absolute; right: 0; bottom: 0; left: 0; padding: 24px 28px; color: white; background: linear-gradient(transparent, rgba(58, 13, 38, .76)); font-size: .67rem; letter-spacing: .12em; text-transform: uppercase; }
 
       /* 
+        ========================================
         INTRO SECTION - TWO COLUMN GRID
-        Different proportions than hero (.9fr left, 1.1fr right)
+        ========================================
+        About section with title on left, content on right.
+        Column proportions: .9fr (left) and 1.1fr (right) - opposite of hero.
       */
       .intro { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; padding: 92px 0; align-items: start; }
       
-      /* Reusable section title style (used across multiple sections) */
+      /* 
+        REUSABLE SECTION TITLE
+        Used across intro, albums, songs sections for consistent headings.
+        Responsive sizing with clamp(): 2.5rem to 4.8rem based on viewport.
+      */
       .section-title { font-family: "Playfair Display", Georgia, serif; font-size: clamp(2.5rem, 5vw, 4.8rem); letter-spacing: -.055em; line-height: .94; }
       .intro p { max-width: 58ch; font-size: .89rem; line-height: 1.9; }
       
       /* 
-        FAST FACTS - 3-COLUMN GRID
-        'repeat(3, 1fr)' creates three equal columns
+        FAST FACTS GRID
+        ===============
+        Three equal columns displaying quick statistics.
+        'repeat(3, 1fr)' is shorthand for '1fr 1fr 1fr'.
       */
       .fast-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
       .fact { padding: 18px 12px; border-top: 1px solid var(--ink); }
@@ -226,31 +373,44 @@
       .fact span { font-size: .66rem; line-height: 1.5; }
 
       /* 
+        ========================================
         ALBUMS SECTION
-        Grid of album cards with individual color themes
+        ========================================
+        Grid of 12 album cards, each with unique color theme.
       */
       .albums { padding: 76px 0 88px; }
       .albums-top { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 27px; }
       .albums-top p { max-width: 44ch; margin: 0; font-size: .78rem; line-height: 1.7; }
       
-      /* 3-column grid for album cards */
+      /* Album grid: 3 equal columns */
       .album-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
       
       /* 
         ALBUM CARD
-        Complex styling with multiple pseudo-elements for effects
+        ==========
+        Complex component with layered pseudo-elements.
+        
+        LAYER STACKING (bottom to top):
+        1. ::before - Colored gradient background (album-specific)
+        2. ::after - Dark overlay gradient for text readability
+        3. Content - Year, title, description
+        
+        KEY PROPERTIES:
+        - isolation: isolate creates new stacking context
+        - overflow: hidden clips the zoomed ::before on hover
       */
       .album { min-height: 350px; display: flex; flex-direction: column; justify-content: flex-end; padding: 23px; overflow: hidden; position: relative; border-radius: 22px; box-shadow: var(--shadow); color: white; isolation: isolate; }
       
       /* 
         PSEUDO-ELEMENTS FOR CARD EFFECTS
-        ::before = colored background gradient (specific to each album)
-        ::after = dark overlay gradient for text readability
+        ================================
+        ::before - Album-specific colored background (z-index: -2)
+        ::after - Dark gradient overlay for text contrast (z-index: -1)
       */
       .album::before { position: absolute; z-index: -2; inset: 0; content: ""; transition: transform .4s ease; }
       .album::after { position: absolute; z-index: -1; inset: 0; background: linear-gradient(180deg, transparent 30%, rgba(39, 12, 29, .86)); content: ""; }
       
-      /* Zoom effect on hover */
+      /* Hover effect: Scale background by 7% for subtle zoom */
       .album:hover::before { transform: scale(1.07); }
       
       .album .year { margin-bottom: 7px; font-size: .68rem; letter-spacing: .14em; }
@@ -259,7 +419,20 @@
       
       /* 
         ALBUM-SPECIFIC COLOR THEMES
-        Each class applies a unique gradient matching the album aesthetic
+        ===========================
+        Each album era has a unique gradient reflecting its aesthetic:
+        - debut: Green/gold (country roots)
+        - fearless: Gold (fairy tale)
+        - speak now: Purple (self-written emotion)
+        - red: Red (heartbreak)
+        - nineteen/1989: Blue (pop transformation)
+        - reputation: Black/gray (dark glamour)
+        - lover: Pastel rainbow (joyful love)
+        - folklore: Gray/forest (indie folk)
+        - evermore: Brown/amber (winter folklore)
+        - midnights: Midnight blue (late night thoughts)
+        - tortured: Typewriter gray (poetic confessionals)
+        - eras: Pink/purple (celebration of all eras)
       */
       .album.debut::before { background: linear-gradient(140deg, #77a54e, #e4cf6d 42%, #437c4b); }  /* Green/gold country */
       .album.fearless::before { background: linear-gradient(145deg, #cba35a, #fae6a3 45%, #916b31); }  /* Gold */
@@ -275,18 +448,33 @@
       .album.eras::before { background: linear-gradient(145deg, #f184bc, #ffc5df 46%, #8c4b9c); }  /* Pink/purple tour */
 
       /* 
+        ========================================
         SONGS SECTION
-        Two-column layout with styled list
+        ========================================
+        Two-column layout with custom styled ordered list.
+        
+        LEFT COLUMN: Section introduction text
+        RIGHT COLUMN: Numbered song list (5 songs)
       */
       .songs { display: grid; grid-template-columns: .85fr 1.15fr; gap: 37px; padding: 84px 0; border-top: 1px solid var(--line); }
       .songs p { max-width: 40ch; font-size: .83rem; line-height: 1.8; }
       
-      /* Custom ordered list styling */
+      /* 
+        CUSTOM ORDERED LIST
+        Removes default browser list styling for custom design.
+        Border-top creates first divider line.
+      */
       .song-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--ink); }
       
       /* 
         LIST ITEMS WITH CSS GRID
-        Three columns: number, song title, album name
+        =======================
+        Three-column layout per song:
+        - Column 1 (42px): Track number in pink
+        - Column 2 (1fr): Song title in decorative font
+        - Column 3 (auto): Album name, right-aligned
+        
+        Each item has a bottom border creating row dividers.
       */
       .song-list li { display: grid; grid-template-columns: 42px 1fr auto; gap: 14px; align-items: center; padding: 17px 0; border-bottom: 1px solid var(--line); }
       .song-list .number { color: var(--hot-pink); font-size: .72rem; }
@@ -294,22 +482,42 @@
       .song-list span { font-size: .66rem; text-align: right; }
 
       /* 
+        ========================================
         FINALE SECTION
-        Pink closing panel with decorative circle element
+        ========================================
+        Closing statement on hot pink background.
+        Features decorative circle element using ::after.
       */
       .finale { margin-bottom: 50px; padding: clamp(30px, 6vw, 70px); border-radius: 28px; background: var(--hot-pink); color: white; overflow: hidden; position: relative; }
       
-      /* Decorative circle using ::after pseudo-element */
+      /* 
+        DECORATIVE CIRCLE (::after)
+        Positioned partially outside container for visual interest.
+        Semi-transparent border creates subtle ring effect.
+      */
       .finale::after { position: absolute; right: -75px; bottom: -115px; width: 340px; height: 340px; border: 34px solid rgba(255, 216, 234, .34); border-radius: 50%; content: ""; }
       .finale h2 { max-width: 10ch; margin-bottom: 18px; font-family: "Playfair Display", Georgia, serif; font-size: clamp(2.6rem, 5vw, 5rem); font-style: italic; letter-spacing: -.055em; line-height: .9; }
       .finale p { position: relative; z-index: 1; max-width: 54ch; font-size: .8rem; line-height: 1.8; }
       
-      /* Site footer */
+      /* Site footer: Centered small text */
       footer { padding: 0 0 30px; color: rgba(60, 23, 48, .7); font-size: .65rem; line-height: 1.7; text-align: center; }
 
       /* 
+        ========================================
         RESPONSIVE DESIGN - MEDIA QUERIES
-        Adjust layout for tablets (850px) and phones (560px)
+        ========================================
+        Mobile-first breakpoints adjust layout for smaller screens.
+        
+        BREAKPOINT 1: 850px (Tablets)
+        - Stack two-column grids to single column
+        - Reduce album grid from 3 to 2 columns
+        
+        BREAKPOINT 2: 560px (Phones)
+        - Adjust container padding
+        - Stack navigation vertically
+        - Reduce hero/image heights
+        - Scale down sticker badge
+        - Stack facts and albums vertically
       */
       @media (max-width: 850px) {
         .hero, .intro, .songs { grid-template-columns: 1fr; }  /* Stack to single column */
@@ -336,28 +544,41 @@
   </head>
   <body>
     <!-- 
-      CTF NOTE: The challenge flag is intentionally hidden in source comments.
-      This is a common technique in Capture The Flag (CTF) challenges.
+      ================================================================
+      CTF CHALLENGE FLAG
+      ================================================================
+      This page contains a hidden flag for Capture The Flag (CTF) challenges.
+      Flags are typically hidden in HTML comments, CSS, or JavaScript.
+      
+      FLAG LOCATION: Found in the comment below!
+      Format: uahCTF{...}
     -->
     <!-- uahCTF{out_of_style} -->
     
     <!-- 
-      PAGE STRUCTURE OVERVIEW:
+      ================================================================
+      PAGE STRUCTURE OVERVIEW
+      ================================================================
       
-      The body is organized into semantic sections:
-      1. HEADER - Contains logo and navigation
-      2. MAIN - Primary content with multiple sections:
-         - Hero (introduction)
-         - Intro (about section)
-         - Albums (grid of album cards)
-         - Songs (starter playlist)
-         - Finale (closing statement)
-      3. FOOTER - Credits and legal text
+      The body uses semantic HTML5 elements for accessibility and SEO:
       
-      Semantic HTML5 elements improve:
-      - Accessibility (screen readers understand the structure)
-      - SEO (search engines better index the content)
-      - Code maintainability (easier to read and modify)
+      1. HEADER - Site branding and primary navigation
+         - Logo link (returns to top)
+         - Nav with anchor links to sections
+      
+      2. MAIN - Primary page content containing:
+         - Hero Section: Eye-catching introduction with image
+         - Intro Section: Artist biography and quick facts grid
+         - Albums Section: 12 album cards in responsive grid
+         - Songs Section: Curated 5-song starter playlist
+         - Finale Section: Closing statement with decorative element
+      
+      3. FOOTER - Credits and legal disclaimer
+      
+      BENEFITS OF SEMANTIC HTML:
+      - Accessibility: Screen readers can navigate by section
+      - SEO: Search engines understand content hierarchy
+      - Maintainability: Clear structure for future developers
     -->
     <header class="site-header shell">
       <a class="logo" href="#top">Taylor Swift</a>
@@ -369,44 +590,55 @@
     </header>
 
     <!-- 
+      ================================================================
       MAIN CONTENT AREA
-      <main> contains the primary content unique to this page
-      id="top" serves as anchor target for "back to top" links
+      ================================================================
+      The <main> element wraps all primary page content.
+      
+      - id="top" serves as anchor target for "back to top" links
+      - Only one <main> per page (excludes header/footer/nav)
     -->
     <main id="top">
       <!-- 
+        ================================================================
         HERO SECTION
-        First thing visitors see - makes a strong visual impression
+        ================================================================
+        First visual section visitors see - designed for impact.
         
-        aria-labelledby connects this section to its heading (h1)
-        This helps screen reader users understand the section's purpose
+        ACCESSIBILITY:
+        - aria-labelledby connects section to its h1 heading
+        - Screen readers announce "Hero Section, Meet me at midnight"
+        
+        LAYOUT:
+        - CSS Grid with two columns (text left, image right)
+        - Min-height ensures visual prominence
       -->
       <section class="hero shell" aria-labelledby="hero-title">
-        <!-- Left column: text content -->
+        <!-- Left column: Text content area -->
         <div class="hero-copy">
-          <!-- Eyebrow label (small uppercase text above main heading) -->
+          <!-- Eyebrow: Small uppercase label above main heading -->
           <span class="eyebrow">The Eras Edit / a fan guide</span>
           
-          <!-- Main page heading (h1) -->
+          <!-- H1: Main page heading (only one per page) -->
           <h1 id="hero-title">Meet me at midnight.</h1>
           
-          <!-- Descriptive paragraph -->
+          <!-- Intro paragraph: Describes site purpose -->
           <p>A bright, pink celebration of Taylor Swift's songwriting, eras, and the songs that make each album feel like its own little world.</p>
           
-          <!-- Call-to-action buttons using pill button style -->
+          <!-- Call-to-action buttons (pill style) -->
           <div class="hero-links">
             <a class="pill filled" href="#albums">Pick an era</a>
             <a class="pill" href="#songs">Find your first song</a>
           </div>
           
-          <!-- Decorative badge image with alt text for accessibility -->
+          <!-- Decorative image with descriptive alt text -->
           <img class="hero-badge" src="eras-badge.png" alt="Pink Taylor Swift inspired badge with sparkles and a heart" />
         </div>
         
-        <!-- Right column: image area with decorative elements -->
-        <!-- role="img" tells assistive tech this div functions as an image -->
+        <!-- Right column: Image area with decorative overlays -->
+        <!-- role="img" tells assistive tech this div functions as a single image -->
         <div class="hero-photo" role="img" aria-label="Taylor Swift promotional portrait from the 1989 era">
-          <!-- Circular sticker badge positioned absolutely -->
+          <!-- Circular sticker badge (positioned absolutely) -->
           <span class="hero-sticker">songwriter<br />storyteller<br />sparkle</span>
           
           <!-- Bottom caption with gradient fade overlay -->
@@ -415,26 +647,32 @@
       </section>
 
       <!-- 
+        ================================================================
         INTRO SECTION
-        Explains the site concept before showing album grid
+        ================================================================
+        Explains the site concept before showing album grid.
         
-        Uses two-column grid layout:
-        - Left: Section title
-        - Right: Descriptive text and fast facts
+        LAYOUT:
+        - Two-column CSS Grid
+        - Left: Section title (eyebrow + h2)
+        - Right: Descriptive paragraphs + facts grid
+        
+        ACCESSIBILITY:
+        - id="about" matches nav link for keyboard navigation
       -->
       <section class="intro shell" id="about">
-        <!-- Left column: eyebrow and heading -->
+        <!-- Left column: Section heading -->
         <div>
           <span class="eyebrow">Why she matters</span>
           <h2 class="section-title">Every era tells a different story.</h2>
         </div>
         
-        <!-- Right column: paragraphs and facts grid -->
+        <!-- Right column: Content and facts -->
         <div>
           <p>Taylor Swift is a singer-songwriter known for turning sharp details into unforgettable pop moments. From country beginnings to stadium-ready pop, indie folk, and late-night confessionals, her catalog has a doorway for every mood.</p>
           <p>Start with the album color that calls to you, then follow the songs. There is no wrong order: this is a discography built for revisiting.</p>
           
-          <!-- Fast facts displayed in 3-column grid -->
+          <!-- Fast facts: 3-column grid of statistics -->
           <div class="fast-facts" aria-label="Taylor Swift facts">
             <div class="fact"><strong>11</strong><span>studio albums across country, pop, folk, and more</span></div>
             <div class="fact"><strong>14</strong><span>Grammy Awards, including four Album of the Year wins</span></div>
@@ -444,16 +682,28 @@
       </section>
 
       <!-- 
+        ================================================================
         ALBUMS SECTION
-        Grid of album cards representing each Taylor Swift era
+        ================================================================
+        Grid of 12 album cards representing each Taylor Swift era.
         
-        Each card uses:
-        - ::before pseudo-element for colored background gradient
-        - ::after pseudo-element for dark overlay (text readability)
-        - Hover effect that scales the background
+        CARD STRUCTURE:
+        Each <article> contains:
+        - Year and era description
+        - Album title (h3)
+        - Brief mood description + starter song recommendation
+        
+        VISUAL EFFECTS:
+        - ::before pseudo-element: Album-specific gradient background
+        - ::after pseudo-element: Dark overlay for text readability
+        - Hover: Background scales 7% for zoom effect
+        
+        ACCESSIBILITY:
+        - aria-labelledby connects to section heading
+        - id="albums" matches nav link
       -->
       <section class="albums shell" id="albums" aria-labelledby="albums-title">
-        <!-- Section header with title and description -->
+        <!-- Section header: Title and description -->
         <div class="albums-top">
           <div>
             <span class="eyebrow">Album library</span>
@@ -462,9 +712,9 @@
           <p>Each card is a starting point, with a quick mood check and one essential track to put on first.</p>
         </div>
         
-        <!-- 3-column grid of album cards -->
+        <!-- Album grid: 3 columns (responsive to 2 then 1 on smaller screens) -->
         <div class="album-grid">
-          <!-- Each <article> represents one album -->
+          <!-- Each <article> represents one album era -->
           <article class="album debut"><span class="year">2006 / COUNTRY ROOTS</span><h3>Taylor Swift</h3><p>Small-town scenes and first crushes. Start with: "Tim McGraw."</p></article>
           <article class="album fearless"><span class="year">2008 / GOLDEN &amp; FEARLESS</span><h3>Fearless</h3><p>Fairy-tale heartache and fearless joy. Start with: "Love Story."</p></article>
           <article class="album speaknow"><span class="year">2010 / PURPLE &amp; UNFILTERED</span><h3>Speak Now</h3><p>Big feelings, bigger gowns, all self-written. Start with: "Enchanted."</p></article>
@@ -481,24 +731,35 @@
       </section>
 
       <!-- 
+        ================================================================
         SONGS SECTION
-        Starter playlist for new listeners
+        ================================================================
+        Curated 5-song starter playlist for new listeners.
         
-        Uses custom ordered list styling with CSS Grid:
-        - Column 1: Track number (pink)
-        - Column 2: Song title (decorative font)
-        - Column 3: Album name (right-aligned)
+        LAYOUT:
+        - Two-column CSS Grid
+        - Left: Section introduction
+        - Right: Custom styled ordered list
+        
+        LIST STYLING:
+        - Default numbers hidden, custom numbers in pink
+        - CSS Grid creates 3 columns: number, title, album
+        - Top/bottom borders create row dividers
+        
+        ACCESSIBILITY:
+        - id="songs" matches nav link
+        - aria-labelledby connects to section heading
       -->
       <section class="songs shell" id="songs" aria-labelledby="songs-title">
-        <!-- Left column: section introduction -->
+        <!-- Left column: Section intro -->
         <div>
           <span class="eyebrow">A five-song starter pack</span>
           <h2 class="section-title" id="songs-title">Press play here.</h2>
           <p>For a first pass through the eras, these five songs show the range: sparkling romance, devastating writing, synth-pop confidence, and secret storybook worlds.</p>
         </div>
         
-        <!-- Right column: numbered song list -->
-        <!-- Custom list styling removes default numbers, uses grid instead -->
+        <!-- Right column: Numbered song list -->
+        <!-- Custom styling: default list-style removed, grid used instead -->
         <ol class="song-list">
           <li><span class="number">01</span><strong>Love Story</strong><span>Fearless</span></li>
           <li><span class="number">02</span><strong>All Too Well</strong><span>Red</span></li>
@@ -509,11 +770,20 @@
       </section>
 
       <!-- 
+        ================================================================
         FINALE SECTION
-        Closing statement with decorative circular element
+        ================================================================
+        Closing statement with decorative circular element.
         
-        Uses ::after pseudo-element to create the decorative circle
-        positioned partially outside the container for visual interest
+        VISUAL DESIGN:
+        - Hot pink background for emphasis
+        - Decorative circle (::after) positioned partially outside container
+        - Circle uses semi-transparent border for subtle ring effect
+        
+        CONTENT:
+        - Section label ("For the record")
+        - Closing headline (h2)
+        - Disclaimer paragraph about fan page purpose
       -->
       <section class="finale shell">
         <span class="eyebrow" style="color:#ffe0ee">For the record</span>
@@ -523,11 +793,15 @@
     </main>
 
     <!-- 
+      ================================================================
       FOOTER
-      Contains credits and legal disclaimer
+      ================================================================
+      Site-wide footer with credits and legal disclaimer.
       
-      Note: Footer is outside <main> because it's site-wide content,
-      not part of the page's primary unique content
+      NOTE: Footer is placed OUTSIDE <main> because:
+      - It's site-wide content, not unique to this page
+      - Screen readers can skip main content and go straight to footer
+      - Semantic HTML best practice
     -->
     <footer class="shell">Unofficial fan project for a university CTF challenge. Taylor Swift imagery is used here only for the challenge's fan-page concept.</footer>
   </body>
