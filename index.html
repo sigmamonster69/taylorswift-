@@ -90,57 +90,140 @@
         ========================================
         GOOGLE FONTS IMPORT
         ========================================
-        Loads two complementary fonts from Google Fonts CDN:
+        Loads three complementary fonts from Google Fonts CDN for modern typography:
         
-        1. DM Mono (wght@400;500)
-           - A clean monospace font for body text
-           - Weights: Regular (400), Medium (500)
-           - Used for: Paragraphs, labels, small text
+        1. DM Sans (wght@400;500;600;700)
+           - A clean, friendly sans-serif for body text and UI elements
+           - Weights: Regular (400), Medium (500), SemiBold (600), Bold (700)
+           - Used for: Paragraphs, labels, buttons, navigation
+           - Modern alternative to DM Mono for better readability
         
         2. Playfair Display (ital,wght@0,600;0,700;0,800;1,600)
            - An elegant decorative serif font for headings
            - Styles: Regular 600/700/800, Italic 600
            - Used for: h1, h2, h3, logo, album titles
+           - Adds sophistication and editorial feel
+        
+        3. Inter (wght@400;500;600)
+           - Highly readable variable font optimized for screens
+           - Used for: Small text, captions, metadata
+           - Excellent for UI components and digital interfaces
            
         WHY THESE FONTS:
-        The monospace + serif combination creates visual contrast
-        between functional text (DM Mono) and emotional headlines (Playfair).
+        The combination creates a modern hierarchy:
+        - Playfair Display for emotional, eye-catching headlines
+        - DM Sans for comfortable body reading
+        - Inter for crisp UI text and small details
       */
-      @import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Inter:wght@400;500;600&display=swap");
 
       /* 
         ========================================
         CSS CUSTOM PROPERTIES (VARIABLES)
         ========================================
-        Defined in :root for global accessibility.
+        Defined in :root for global accessibility and theming.
+        
+        MODERN DESIGN TOKENS:
+        Following design system principles with semantic naming.
         
         BENEFITS OF CSS VARIABLES:
         - Single source of truth for colors and values
         - Easy theme changes by modifying one location
         - Consistent design system across the entire site
         - Can be dynamically updated with JavaScript if needed
+        - Enables dark mode implementation
         
-        COLOR PALETTE:
-        --ink: Primary text color (dark purple-brown)
+        COLOR PALETTE (Updated for Modern UI):
+        Primary Colors:
+        --ink: Primary text color (deep purple-brown)
         --cream: Light background accent
-        --pink: Primary accent color
-        --hot-pink: Vibrant highlight/CTA color
-        --peach: Soft decorative accent
-        --lilac: Secondary accent (purple)
-        --paper: Semi-transparent white for overlays
+        --pink: Primary brand color
+        --hot-pink: Vibrant CTA/highlight color
+        
+        Secondary Colors:
+        --peach: Warm accent for gradients
+        --lilac: Cool accent for variety
+        --lavender: Soft purple for backgrounds
+        
+        Functional Colors:
+        --paper: Glassmorphism overlay (semi-transparent white)
         --line: Subtle border/divider color
-        --shadow: Reusable drop shadow value
+        --glass-bg: Glass effect background with blur
+        --glass-border: Glass border highlight
+        
+        Effects:
+        --shadow-sm: Small shadow for subtle elevation
+        --shadow-md: Medium shadow for cards
+        --shadow-lg: Large shadow for hero/modals
+        --shadow-glow: Colored glow for interactive elements
+        --blur-sm: Small blur radius
+        --blur-md: Medium blur radius (glassmorphism)
+        --radius-sm: Small border radius (8px)
+        --radius-md: Medium border radius (16px)
+        --radius-lg: Large border radius (24px)
+        --radius-xl: Extra large border radius (32px)
+        --transition-fast: Fast transition (150ms)
+        --transition-base: Base transition (250ms)
+        --transition-slow: Slow transition (400ms)
       */
       :root {
-        --ink: #3c1730;           /* Dark purple-brown for text */
-        --cream: #fff7fa;         /* Light pink-white for backgrounds */
-        --pink: #ff64a7;          /* Medium pink for accents */
-        --hot-pink: #e93486;      /* Vibrant pink for highlights */
-        --peach: #ffceb8;         /* Soft peach for decorations */
-        --lilac: #d9ccff;         /* Light purple for variety */
-        --paper: rgba(255, 255, 255, 0.78);  /* Semi-transparent white */
-        --line: rgba(93, 30, 68, 0.16);      /* Subtle border color */
-        --shadow: 0 18px 46px rgba(174, 49, 113, 0.17);  /* Drop shadow */
+        /* Typography Scale */
+        --font-display: "Playfair Display", Georgia, serif;    /* Headings */
+        --font-body: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;  /* Body text */
+        --font-ui: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;      /* UI elements */
+        
+        /* Color Palette - Modern Pink Theme */
+        --ink: #2d1b2e;                    /* Deep purple-brown for primary text */
+        --ink-light: #4a2c4a;              /* Lighter text for secondary content */
+        --cream: #fff9fb;                  /* Off-white background */
+        --pink: #ff5c9f;                   /* Vibrant pink brand color */
+        --pink-light: #ff8fbf;             /* Soft pink for backgrounds */
+        --hot-pink: #ec3a85;               /* Hot pink for CTAs and highlights */
+        --peach: #ffc9b8;                  /* Warm peach accent */
+        --lilac: #dcc9ff;                  /* Soft lavender */
+        --lavender: #f3e8ff;               /* Very light purple for backgrounds */
+        
+        /* Glassmorphism & Transparency */
+        --paper: rgba(255, 255, 255, 0.85);         /* Semi-transparent white */
+        --glass-bg: rgba(255, 255, 255, 0.65);      /* Glass background */
+        --glass-border: rgba(255, 255, 255, 0.5);   /* Glass border highlight */
+        --line: rgba(93, 30, 68, 0.12);             /* Subtle divider */
+        --overlay-dark: rgba(45, 27, 46, 0.85);     /* Dark overlay for contrast */
+        
+        /* Shadows - Layered Elevation System */
+        --shadow-sm: 0 2px 8px rgba(174, 49, 113, 0.08);       /* Subtle elevation */
+        --shadow-md: 0 8px 24px rgba(174, 49, 113, 0.12);      /* Card elevation */
+        --shadow-lg: 0 16px 48px rgba(174, 49, 113, 0.18);     /* Hero/Modal elevation */
+        --shadow-xl: 0 24px 64px rgba(174, 49, 113, 0.22);     /* Maximum elevation */
+        --shadow-glow: 0 0 24px rgba(236, 58, 133, 0.4);       /* Glow effect */
+        --shadow-float: 0 12px 32px rgba(174, 49, 113, 0.15);  /* Floating effect */
+        
+        /* Blur Effects (Glassmorphism) */
+        --blur-sm: 4px;
+        --blur-md: 12px;
+        --blur-lg: 24px;
+        
+        /* Border Radius - Rounded Corners System */
+        --radius-sm: 8px;
+        --radius-md: 16px;
+        --radius-lg: 24px;
+        --radius-xl: 32px;
+        --radius-full: 9999px;  /* Fully rounded/pill shape */
+        
+        /* Transitions - Smooth Animations */
+        --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-bounce: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+        
+        /* Spacing Scale */
+        --space-xs: 4px;
+        --space-sm: 8px;
+        --space-md: 16px;
+        --space-lg: 24px;
+        --space-xl: 32px;
+        --space-2xl: 48px;
+        --space-3xl: 64px;
       }
 
       /* 
@@ -148,23 +231,40 @@
         RESET & BASE STYLES
         ========================================
         Establishes consistent defaults across all browsers.
+        Modern CSS reset with accessibility-first approach.
       */
       
       /* Universal selector - applies box-sizing to ALL elements */
       * { box-sizing: border-box; }  /* Include padding/border in element width calculations */
       
+      /* Smooth scrolling for anchor link navigation with reduced motion support */
       /* Smooth scrolling for anchor link navigation */
       html { scroll-behavior: smooth; }
+      
+      /* Respect user preference for reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
       
       /* 
         BODY STYLING
         Uses multiple layered backgrounds for a rich gradient effect.
         Layers are painted from bottom to top (first listed = bottom layer).
+        Modern approach with improved color palette and subtle gradients.
       */
       body {
         margin: 0;  /* Remove default browser margin */
         min-width: 320px;  /* Prevent layout from becoming too narrow on small screens */
         color: var(--ink);  /* Use custom property for consistent text color */
+        font-family: var(--font-body);  /* Modern sans-serif for better readability */
+        line-height: 1.6;  /* Improved line height for readability */
+        -webkit-font-smoothing: antialiased;  /* Smoother fonts on macOS */
+        -moz-osx-font-smoothing: grayscale;   /* Smoother fonts on Firefox */
         font-family: "DM Mono", monospace;  /* Monospace font for body text */
         
         /* 
@@ -172,13 +272,28 @@
           1. Linear gradient base: Soft pink gradient from top-left to bottom-right
           2. Radial gradient at 8% 4%: Soft pink spot near top-left
           3. Radial gradient at 92% 18%: Soft peach spot near top-right
+          4. Radial gradient at 50% 80%: Subtle lavender accent at bottom
+          
+          This creates depth and visual interest without images.
+          Updated colors for modern aesthetic.
           
           This creates depth and visual interest without images.
         */
         background:
-          radial-gradient(circle at 8% 4%, rgba(255, 201, 225, 0.95), transparent 23rem),
-          radial-gradient(circle at 92% 18%, rgba(255, 218, 188, 0.92), transparent 24rem),
-          linear-gradient(130deg, #fff9fc 0%, #fff1f7 45%, #ffe9f2 100%);
+          radial-gradient(circle at 50% 80%, rgba(243, 232, 255, 0.6), transparent 28rem),
+          radial-gradient(circle at 8% 4%, rgba(255, 193, 220, 0.7), transparent 23rem),
+          radial-gradient(circle at 92% 18%, rgba(255, 201, 184, 0.65), transparent 24rem),
+          linear-gradient(130deg, #fff9fb 0%, #fff3f7 45%, #ffeef5 100%);
+      }
+      
+      /* Links inherit parent text color for consistency */
+      a { color: inherit; text-decoration: none; }
+      
+      /* Focus visible for better accessibility */
+      :focus-visible {
+        outline: 2px solid var(--hot-pink);
+        outline-offset: 2px;
+        border-radius: var(--radius-sm);
       }
       
       /* Links inherit parent text color for consistency */
@@ -189,6 +304,7 @@
         UTILITY CLASSES
         ========================================
         Reusable helper classes used throughout the site.
+        Modern utility-first approach for rapid development.
       */
       
       /* 
@@ -209,19 +325,87 @@
         
         DESIGN PATTERN: Eyebrows help users scan content by
         providing context before the main heading.
+        Updated with modern letter-spacing and color.
       */
-      .eyebrow { color: var(--hot-pink); font-size: 0.71rem; letter-spacing: 0.16em; text-transform: uppercase; }
+      .eyebrow { 
+        color: var(--hot-pink); 
+        font-size: 0.71rem; 
+        letter-spacing: 0.16em; 
+        text-transform: uppercase; 
+        font-weight: 600;
+        display: inline-block;
+        margin-bottom: var(--space-md);
+      }
 
       /* 
         ========================================
         HEADER STYLES
         ========================================
         Site header with logo and navigation.
+        Uses Flexbox for horizontal layout with glassmorphism effect.
+        Sticky positioning for modern UX pattern.
         Uses Flexbox for horizontal layout.
       */
-      .site-header { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; }
+      .site-header { 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+        padding: 24px 0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        backdrop-filter: blur(var(--blur-md));
+        -webkit-backdrop-filter: blur(var(--blur-md));
+        background: rgba(255, 255, 255, 0.7);
+        transition: background var(--transition-base);
+      }
       
       /* Logo: Decorative italic serif font with hot pink color */
+      .logo { 
+        color: var(--hot-pink); 
+        font-family: var(--font-display); 
+        font-size: 1.43rem; 
+        font-style: italic; 
+        font-weight: 800; 
+        text-decoration: none;
+        transition: transform var(--transition-fast);
+      }
+      .logo:hover {
+        transform: scale(1.02);
+      }
+      
+      /* Navigation: Horizontal row of uppercase links */
+      .site-header nav { 
+        display: flex; 
+        gap: 20px; 
+        font-size: 0.73rem; 
+        letter-spacing: 0.08em; 
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+      .site-header nav a { 
+        text-decoration: none;
+        position: relative;
+        padding: 8px 0;
+        transition: color var(--transition-fast);
+      }
+      /* Animated underline on hover */
+      .site-header nav a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--hot-pink);
+        transition: width var(--transition-base);
+      }
+      .site-header nav a:hover { 
+        color: var(--hot-pink);
+      }
+      .site-header nav a:hover::after {
+        width: 100%;
+      }
       .logo { color: var(--hot-pink); font-family: "Playfair Display", Georgia, serif; font-size: 1.43rem; font-style: italic; font-weight: 800; text-decoration: none; }
       
       /* Navigation: Horizontal row of uppercase links */
@@ -247,6 +431,16 @@
         grid-template-columns: 1.05fr 0.95fr;  /* Two columns: left slightly wider */
         min-height: 590px;                /* Minimum height for visual impact */
         overflow: hidden;                 /* Clip content that exceeds bounds */
+        border: 1px solid var(--glass-border);  /* Glass border effect */
+        border-radius: var(--radius-xl);  /* Modern large rounded corners */
+        background: var(--glass-bg);      /* Glassmorphism background */
+        backdrop-filter: blur(var(--blur-md));  /* Blur effect for glass look */
+        -webkit-backdrop-filter: blur(var(--blur-md));  /* Safari support */
+        box-shadow: var(--shadow-lg);     /* Elevated shadow */
+        transition: box-shadow var(--transition-base);
+      }
+      .hero:hover {
+        box-shadow: var(--shadow-xl);     /* Enhanced shadow on hover */
         border: 1px solid rgba(255,255,255,.72);  /* Subtle white border */
         border-radius: 30px;              /* Rounded corners for modern look */
         background: var(--paper);         /* Semi-transparent white background */
@@ -273,9 +467,42 @@
           * Maximum: 7.1rem
         - 'ch' unit = width of character "0" in current font
       */
-      h1 { max-width: 8ch; margin-bottom: 20px; font-family: "Playfair Display", Georgia, serif; font-size: clamp(3.7rem, 8vw, 7.1rem); font-style: italic; letter-spacing: -0.065em; line-height: .82; }
+      h1 { 
+        max-width: 8ch; 
+        margin-bottom: 20px; 
+        font-family: var(--font-display); 
+        font-size: clamp(3.7rem, 8vw, 7.1rem); 
+        font-style: italic; 
+        letter-spacing: -0.065em; 
+        line-height: .82;
+        text-rendering: optimizeLegibility;
+      }
       
       /* Paragraph: Limited width for optimal readability (48 characters) */
+      .hero-copy p { 
+        max-width: 48ch; 
+        font-size: .92rem; 
+        line-height: 1.8;
+        color: var(--ink-light);
+      }
+      
+      /* Button container: Flexbox with wrapping for mobile */
+      .hero-links { 
+        display: flex; 
+        flex-wrap: wrap; 
+        gap: 10px; 
+        margin-top: 12px; 
+      }
+      
+      /* 
+        PILL BUTTONS - MODERN DESIGN
+        ============================
+        Fully rounded buttons with modern hover effects.
+        Features:
+        - Smooth transitions with cubic-bezier easing
+        - Subtle lift animation
+        - Glow effect on hover
+        - Gradient background option
       .hero-copy p { max-width: 48ch; font-size: .92rem; line-height: 1.8; }
       
       /* Button container: Flexbox with wrapping for mobile */
@@ -289,6 +516,39 @@
         ANIMATION: transition property enables smooth changes:
         - transform: vertical movement on hover
         - background: color change on hover
+        - box-shadow: glow effect appearance
+      */
+      .pill { 
+        display: inline-block; 
+        padding: 14px 22px; 
+        border: 1px solid var(--ink); 
+        border-radius: var(--radius-full); 
+        font-size: .74rem; 
+        letter-spacing: .04em; 
+        text-decoration: none; 
+        font-weight: 500;
+        transition: all var(--transition-base);
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+      }
+      .pill:hover { 
+        transform: translateY(-4px); 
+        background: var(--pink); 
+        box-shadow: var(--shadow-glow);
+        border-color: var(--pink);
+      }
+      .pill.filled { 
+        border-color: var(--hot-pink); 
+        background: linear-gradient(135deg, var(--hot-pink), var(--pink)); 
+        color: white;
+        box-shadow: var(--shadow-md);
+      }
+      .pill.filled:hover {
+        background: linear-gradient(135deg, var(--pink), var(--hot-pink));
+        box-shadow: var(--shadow-glow);
+        transform: translateY(-4px);
+      }
       */
       .pill { display: inline-block; padding: 12px 16px; border: 1px solid var(--ink); border-radius: 999px; font-size: .74rem; letter-spacing: .04em; text-decoration: none; transition: transform .2s ease, background .2s ease; }
       .pill:hover { transform: translateY(-3px); background: var(--pink); }  /* Lift up + pink background */
@@ -298,8 +558,12 @@
       .hero-badge {
         width: min(220px, 100%);
         margin-top: 28px;
-        border-radius: 20px;
-        box-shadow: 0 14px 30px rgba(174, 49, 113, 0.16);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-float);
+        transition: transform var(--transition-slow);
+      }
+      .hero-badge:hover {
+        transform: scale(1.03);
       }
       
       /* 
@@ -307,8 +571,14 @@
         ==============================
         Uses ::before pseudo-element for background image + overlay.
         position: relative establishes containing block for absolute children.
+        Modern approach with gradient overlay and saturation boost.
       */
-      .hero-photo { position: relative; min-height: 470px; background: #f7a2c9; }
+      .hero-photo { 
+        position: relative; 
+        min-height: 470px; 
+        background: linear-gradient(135deg, #f7a2c9, #ffb6d4);
+        border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+      }
       
       /* 
         ::before PSEUDO-ELEMENT
@@ -321,26 +591,73 @@
           2. Background image centered at 26% from top, cover fit
         - filter: saturate(1.12) boosts image color vibrancy by 12%
       */
-      .hero-photo::before { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255, 69, 151, .12), rgba(84, 13, 48, .22)), url("Taylor_Swift_-_1989.png") center 26% / cover; content: ""; filter: saturate(1.12); }
+      .hero-photo::before { 
+        position: absolute; 
+        inset: 0; 
+        background: linear-gradient(180deg, rgba(255, 69, 151, .12), rgba(84, 13, 48, .22)), url("Taylor_Swift_-_1989.png") center 26% / cover; 
+        content: ""; 
+        filter: saturate(1.12);
+        transition: transform var(--transition-slow);
+      }
+      .hero-photo:hover::before {
+        transform: scale(1.02);
+      }
       
       /* 
         CIRCULAR STICKER BADGE
         ======================
         Decorative rotated circle in top-right of hero image.
+        Modern design with gradient background and subtle shadow.
         
         TECHNIQUES:
         - position: absolute places it relative to .hero-photo
         - display: grid + place-items: center centers text inside
         - border-radius: 50% creates perfect circle
         - transform: rotate(12deg) adds playful tilt
+        - box-shadow for depth
       */
-      .hero-sticker { position: absolute; top: 30px; right: 28px; width: 130px; height: 130px; display: grid; place-items: center; border-radius: 50%; background: var(--peach); color: var(--hot-pink); font-size: .65rem; font-weight: 500; letter-spacing: .08em; line-height: 1.55; text-align: center; text-transform: uppercase; transform: rotate(12deg); }
+      .hero-sticker { 
+        position: absolute; 
+        top: 30px; 
+        right: 28px; 
+        width: 130px; 
+        height: 130px; 
+        display: grid; 
+        place-items: center; 
+        border-radius: 50%; 
+        background: linear-gradient(135deg, var(--peach), var(--pink-light)); 
+        color: var(--hot-pink); 
+        font-size: .65rem; 
+        font-weight: 600; 
+        letter-spacing: .08em; 
+        line-height: 1.55; 
+        text-align: center; 
+        text-transform: uppercase; 
+        transform: rotate(12deg);
+        box-shadow: var(--shadow-md);
+        border: 2px solid rgba(255, 255, 255, 0.5);
+      }
       
       /* 
         BOTTOM CAPTION OVERLAY
         ======================
         Text overlay at bottom of hero image with gradient fade.
         Background fades from transparent (top) to dark purple (bottom).
+        Modern approach with improved contrast.
+      */
+      .hero-note { 
+        position: absolute; 
+        right: 0; 
+        bottom: 0; 
+        left: 0; 
+        padding: 24px 28px; 
+        color: white; 
+        background: linear-gradient(transparent, rgba(45, 27, 46, 0.9)); 
+        font-size: .67rem; 
+        letter-spacing: .12em; 
+        text-transform: uppercase;
+        font-weight: 500;
+      }
       */
       .hero-note { position: absolute; right: 0; bottom: 0; left: 0; padding: 24px 28px; color: white; background: linear-gradient(transparent, rgba(58, 13, 38, .76)); font-size: .67rem; letter-spacing: .12em; text-transform: uppercase; }
 
@@ -350,13 +667,40 @@
         ========================================
         About section with title on left, content on right.
         Column proportions: .9fr (left) and 1.1fr (right) - opposite of hero.
+        
+        MODERN ENHANCEMENTS:
+        - Increased whitespace for breathing room
+        - Subtle card effects for fact boxes
+        - Smooth hover animations
       */
-      .intro { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; padding: 92px 0; align-items: start; }
+      .intro { 
+        display: grid; 
+        grid-template-columns: .9fr 1.1fr; 
+        gap: 48px; 
+        padding: clamp(60px, 8vw, 92px) 0; 
+        align-items: start; 
+      }
       
       /* 
         REUSABLE SECTION TITLE
         Used across intro, albums, songs sections for consistent headings.
         Responsive sizing with clamp(): 2.5rem to 4.8rem based on viewport.
+        Modern typography with improved letter-spacing and line-height.
+      */
+      .section-title { 
+        font-family: var(--font-display); 
+        font-size: clamp(2.5rem, 5vw, 4.8rem); 
+        letter-spacing: -.055em; 
+        line-height: .94;
+        color: var(--ink);
+        margin-bottom: var(--space-lg);
+      }
+      .intro p { 
+        max-width: 58ch; 
+        font-size: .89rem; 
+        line-height: 1.9;
+        color: var(--ink-light);
+      }
       */
       .section-title { font-family: "Playfair Display", Georgia, serif; font-size: clamp(2.5rem, 5vw, 4.8rem); letter-spacing: -.055em; line-height: .94; }
       .intro p { max-width: 58ch; font-size: .89rem; line-height: 1.9; }
@@ -366,22 +710,89 @@
         ===============
         Three equal columns displaying quick statistics.
         'repeat(3, 1fr)' is shorthand for '1fr 1fr 1fr'.
+        
+        MODERN CARD DESIGN:
+        - Rounded corners
+        - Subtle background
+        - Hover lift effect
+        - Border accent on top
       */
-      .fast-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
-      .fact { padding: 18px 12px; border-top: 1px solid var(--ink); }
-      .fact strong { display: block; margin-bottom: 7px; color: var(--hot-pink); font-family: "Playfair Display", Georgia, serif; font-size: 2.1rem; }
-      .fact span { font-size: .66rem; line-height: 1.5; }
+      .fast-facts { 
+        display: grid; 
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 12px; 
+        margin-top: 28px; 
+      }
+      .fact { 
+        padding: 18px 12px; 
+        border-top: 2px solid var(--hot-pink);
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: var(--radius-md);
+        transition: all var(--transition-base);
+      }
+      .fact:hover {
+        transform: translateY(-4px);
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: var(--shadow-md);
+      }
+      .fact strong { 
+        display: block; 
+        margin-bottom: 7px; 
+        color: var(--hot-pink); 
+        font-family: var(--font-display); 
+        font-size: 2.1rem;
+        line-height: 1;
+      }
+      .fact span { 
+        font-size: .66rem; 
+        line-height: 1.5;
+        color: var(--ink-light);
+      }
 
       /* 
         ========================================
+        ALBUMS SECTION - MODERN CARD GRID
+        ========================================
+        Grid of 12 album cards, each with unique color theme.
+        
+        MODERN UI PATTERNS:
+        - Card-based layout with elevation
+        - Hover zoom effects
+        - Gradient overlays for text readability
+        - Consistent spacing system
         ALBUMS SECTION
         ========================================
         Grid of 12 album cards, each with unique color theme.
       */
-      .albums { padding: 76px 0 88px; }
-      .albums-top { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 27px; }
-      .albums-top p { max-width: 44ch; margin: 0; font-size: .78rem; line-height: 1.7; }
+      .albums { 
+        padding: clamp(60px, 8vw, 76px) 0 clamp(70px, 9vw, 88px); 
+      }
+      .albums-top { 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: end; 
+        gap: 20px; 
+        margin-bottom: 27px; 
+        flex-wrap: wrap;
+      }
+      .albums-top p { 
+        max-width: 44ch; 
+        margin: 0; 
+        font-size: .78rem; 
+        line-height: 1.7;
+        color: var(--ink-light);
+      }
       
+      /* Album grid: 3 equal columns with modern gap */
+      .album-grid { 
+        display: grid; 
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 20px; 
+      }
+      
+      /* 
+        ALBUM CARD - MODERN DESIGN
+        ==========================
       /* Album grid: 3 equal columns */
       .album-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
       
@@ -398,24 +809,81 @@
         KEY PROPERTIES:
         - isolation: isolate creates new stacking context
         - overflow: hidden clips the zoomed ::before on hover
+        - Modern border radius and shadow system
+        - Smooth hover transitions
       */
-      .album { min-height: 350px; display: flex; flex-direction: column; justify-content: flex-end; padding: 23px; overflow: hidden; position: relative; border-radius: 22px; box-shadow: var(--shadow); color: white; isolation: isolate; }
+      .album { 
+        min-height: 350px; 
+        display: flex; 
+        flex-direction: column; 
+        justify-content: flex-end; 
+        padding: 23px; 
+        overflow: hidden; 
+        position: relative; 
+        border-radius: var(--radius-lg); 
+        box-shadow: var(--shadow-md); 
+        color: white; 
+        isolation: isolate;
+        cursor: pointer;
+        transition: box-shadow var(--transition-base), transform var(--transition-base);
+      }
+      .album:hover {
+        box-shadow: var(--shadow-xl);
+        transform: translateY(-6px);
+      }
       
       /* 
         PSEUDO-ELEMENTS FOR CARD EFFECTS
         ================================
         ::before - Album-specific colored background (z-index: -2)
         ::after - Dark gradient overlay for text contrast (z-index: -1)
+        
+        Enhanced with smooth scale transition on hover.
       */
-      .album::before { position: absolute; z-index: -2; inset: 0; content: ""; transition: transform .4s ease; }
-      .album::after { position: absolute; z-index: -1; inset: 0; background: linear-gradient(180deg, transparent 30%, rgba(39, 12, 29, .86)); content: ""; }
+      .album::before { 
+        position: absolute; 
+        z-index: -2; 
+        inset: 0; 
+        content: ""; 
+        transition: transform var(--transition-slow); 
+      }
+      .album::after { 
+        position: absolute; 
+        z-index: -1; 
+        inset: 0; 
+        background: linear-gradient(180deg, transparent 30%, rgba(39, 12, 29, .86)); 
+        content: ""; 
+      }
       
       /* Hover effect: Scale background by 7% for subtle zoom */
+      .album:hover::before { 
+        transform: scale(1.07); 
+      }
       .album:hover::before { transform: scale(1.07); }
       
-      .album .year { margin-bottom: 7px; font-size: .68rem; letter-spacing: .14em; }
-      .album h3 { margin-bottom: 9px; font-family: "Playfair Display", Georgia, serif; font-size: 2.35rem; font-style: italic; letter-spacing: -.045em; line-height: .9; }
-      .album p { margin: 0; font-size: .7rem; line-height: 1.65; }
+      .album .year { 
+        margin-bottom: 7px; 
+        font-size: .68rem; 
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        font-weight: 600;
+        opacity: 0.9;
+      }
+      .album h3 { 
+        margin-bottom: 9px; 
+        font-family: var(--font-display); 
+        font-size: 2.35rem; 
+        font-style: italic; 
+        letter-spacing: -.045em; 
+        line-height: .9;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      }
+      .album p { 
+        margin: 0; 
+        font-size: .7rem; 
+        line-height: 1.65;
+        opacity: 0.95;
+      }
       
       /* 
         ALBUM-SPECIFIC COLOR THEMES
@@ -449,51 +917,189 @@
 
       /* 
         ========================================
+        SONGS SECTION - MODERN LIST DESIGN
         SONGS SECTION
         ========================================
         Two-column layout with custom styled ordered list.
         
         LEFT COLUMN: Section introduction text
         RIGHT COLUMN: Numbered song list (5 songs)
+        
+        MODERN ENHANCEMENTS:
+        - Interactive hover states on list items
+        - Gradient accent on numbers
+        - Smooth transitions
+        - Improved typography hierarchy
       */
-      .songs { display: grid; grid-template-columns: .85fr 1.15fr; gap: 37px; padding: 84px 0; border-top: 1px solid var(--line); }
-      .songs p { max-width: 40ch; font-size: .83rem; line-height: 1.8; }
+      .songs { 
+        display: grid; 
+        grid-template-columns: .85fr 1.15fr; 
+        gap: 37px; 
+        padding: clamp(60px, 8vw, 84px) 0; 
+        border-top: 1px solid var(--line); 
+      }
+      .songs p { 
+        max-width: 40ch; 
+        font-size: .83rem; 
+        line-height: 1.8;
+        color: var(--ink-light);
+      }
       
       /* 
         CUSTOM ORDERED LIST
         Removes default browser list styling for custom design.
         Border-top creates first divider line.
       */
+      .song-list { 
+        margin: 0; 
+        padding: 0; 
+        list-style: none; 
+        border-top: 2px solid var(--hot-pink); 
+      }
       .song-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--ink); }
       
       /* 
         LIST ITEMS WITH CSS GRID
         =======================
         Three-column layout per song:
+        - Column 1 (42px): Track number in pink circle
         - Column 1 (42px): Track number in pink
         - Column 2 (1fr): Song title in decorative font
         - Column 3 (auto): Album name, right-aligned
         
         Each item has a bottom border creating row dividers.
+        Modern hover effect with background highlight.
       */
-      .song-list li { display: grid; grid-template-columns: 42px 1fr auto; gap: 14px; align-items: center; padding: 17px 0; border-bottom: 1px solid var(--line); }
-      .song-list .number { color: var(--hot-pink); font-size: .72rem; }
-      .song-list strong { font-family: "Playfair Display", Georgia, serif; font-size: 1.3rem; font-style: italic; }
-      .song-list span { font-size: .66rem; text-align: right; }
+      .song-list li { 
+        display: grid; 
+        grid-template-columns: 42px 1fr auto; 
+        gap: 14px; 
+        align-items: center; 
+        padding: 17px 0; 
+        border-bottom: 1px solid var(--line);
+        transition: all var(--transition-fast);
+        border-radius: var(--radius-sm);
+        margin: 0 -8px;
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+      .song-list li:hover {
+        background: rgba(255, 92, 159, 0.08);
+        border-bottom-color: var(--pink);
+      }
+      .song-list .number { 
+        color: var(--hot-pink); 
+        font-size: .72rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        background: linear-gradient(135deg, var(--pink-light), var(--hot-pink));
+        border-radius: 50%;
+        color: white;
+      }
+      .song-list strong { 
+        font-family: var(--font-display); 
+        font-size: 1.3rem; 
+        font-style: italic;
+        transition: color var(--transition-fast);
+      }
+      .song-list li:hover strong {
+        color: var(--hot-pink);
+      }
+      .song-list span { 
+        font-size: .66rem; 
+        text-align: right;
+        color: var(--ink-light);
+        font-weight: 500;
+      }
 
       /* 
         ========================================
+        FINALE SECTION - GRADIENT CTA
+        ========================================
+        Closing statement on hot pink gradient background.
+        Features decorative circle element using ::after.
+        
+        MODERN ENHANCEMENTS:
+        - Gradient background instead of solid color
+        - Enhanced shadow for depth
+        - Animated decorative elements
+        - Better text contrast
         FINALE SECTION
         ========================================
         Closing statement on hot pink background.
         Features decorative circle element using ::after.
       */
-      .finale { margin-bottom: 50px; padding: clamp(30px, 6vw, 70px); border-radius: 28px; background: var(--hot-pink); color: white; overflow: hidden; position: relative; }
+      .finale { 
+        margin-bottom: 50px; 
+        padding: clamp(30px, 6vw, 70px); 
+        border-radius: var(--radius-xl); 
+        background: linear-gradient(135deg, var(--hot-pink), #ff3d8e); 
+        color: white; 
+        overflow: hidden; 
+        position: relative;
+        box-shadow: var(--shadow-lg);
+      }
       
       /* 
         DECORATIVE CIRCLE (::after)
         Positioned partially outside container for visual interest.
         Semi-transparent border creates subtle ring effect.
+        Enhanced with animation and gradient.
+      */
+      .finale::after { 
+        position: absolute; 
+        right: -75px; 
+        bottom: -115px; 
+        width: 340px; 
+        height: 340px; 
+        border: 34px solid rgba(255, 216, 234, .34); 
+        border-radius: 50%; 
+        content: "";
+        animation: pulse 4s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 0.8; }
+        50% { transform: scale(1.05); opacity: 0.6; }
+      }
+      .finale h2 { 
+        max-width: 10ch; 
+        margin-bottom: 18px; 
+        font-family: var(--font-display); 
+        font-size: clamp(2.6rem, 5vw, 5rem); 
+        font-style: italic; 
+        letter-spacing: -.055em; 
+        line-height: .9;
+        text-shadow: 0 2px 12px rgba(0,0,0,0.2);
+      }
+      .finale p { 
+        position: relative; 
+        z-index: 1; 
+        max-width: 54ch; 
+        font-size: .8rem; 
+        line-height: 1.8;
+        opacity: 0.95;
+      }
+      
+      /* Site footer: Centered small text with modern styling */
+      footer { 
+        padding: 0 0 30px; 
+        color: rgba(60, 23, 48, .7); 
+        font-size: .65rem; 
+        line-height: 1.7; 
+        text-align: center;
+      }
+      footer a {
+        color: var(--hot-pink);
+        font-weight: 600;
+        transition: color var(--transition-fast);
+      }
+      footer a:hover {
+        color: var(--pink);
+      }
       */
       .finale::after { position: absolute; right: -75px; bottom: -115px; width: 340px; height: 340px; border: 34px solid rgba(255, 216, 234, .34); border-radius: 50%; content: ""; }
       .finale h2 { max-width: 10ch; margin-bottom: 18px; font-family: "Playfair Display", Georgia, serif; font-size: clamp(2.6rem, 5vw, 5rem); font-style: italic; letter-spacing: -.055em; line-height: .9; }
@@ -508,6 +1114,24 @@
         ========================================
         Mobile-first breakpoints adjust layout for smaller screens.
         
+        MODERN APPROACH:
+        - Fluid typography with clamp() reduces need for breakpoints
+        - CSS Grid auto-fit minimizes media query complexity
+        - Touch-friendly targets on mobile (44px minimum)
+        - Reduced motion support via prefers-reduced-motion
+        
+        BREAKPOINT 1: 850px (Tablets & Small Laptops)
+        - Stack two-column grids to single column
+        - Reduce album grid from 3 to 2 columns
+        - Adjust hero heights for portrait orientation
+        
+        BREAKPOINT 2: 560px (Phones)
+        - Adjust container padding for edge-to-edge content
+        - Stack navigation vertically if needed
+        - Reduce hero/image heights for mobile screens
+        - Scale down decorative elements
+        - Stack facts and albums vertically
+        - Optimize touch targets
         BREAKPOINT 1: 850px (Tablets)
         - Stack two-column grids to single column
         - Reduce album grid from 3 to 2 columns
@@ -522,23 +1146,90 @@
       @media (max-width: 850px) {
         .hero, .intro, .songs { grid-template-columns: 1fr; }  /* Stack to single column */
         .hero-copy { min-height: 470px; }
-        .hero-photo { min-height: 470px; }
+        .hero-photo { min-height: 470px; border-radius: 0 0 var(--radius-xl) var(--radius-xl); }
         .album-grid { grid-template-columns: repeat(2, 1fr); }  /* 2 columns instead of 3 */
+        .site-header nav { gap: 15px; }
       }
       @media (max-width: 560px) {
         .shell { width: min(100% - 22px, 1180px); }
-        .site-header { align-items: flex-start; gap: 15px; }
-        .site-header nav { gap: 11px; font-size: .61rem; }
-        .hero { border-radius: 20px; }
-        .hero-copy { min-height: 430px; padding: 28px; }
-        .hero-photo { min-height: 390px; }
+        .site-header { 
+          align-items: flex-start; 
+          gap: 15px;
+          flex-wrap: wrap;
+        }
+        .site-header nav { 
+          gap: 11px; 
+          font-size: .61rem;
+          order: 3;
+          width: 100%;
+          justify-content: center;
+          padding-top: 12px;
+          border-top: 1px solid var(--line);
+          margin-top: 8px;
+        }
+        .hero { 
+          border-radius: var(--radius-lg);
+          grid-template-columns: 1fr;
+        }
+        .hero-copy { min-height: auto; padding: 28px; }
+        .hero-photo { min-height: 390px; border-radius: 0 0 var(--radius-lg) var(--radius-lg); }
         .hero-sticker { top: 18px; right: 18px; width: 102px; height: 102px; font-size: .54rem; }
-        .intro, .albums, .songs { padding: 58px 0; }
+        .intro, .albums, .songs { padding: clamp(40px, 6vw, 58px) 0; }
         .fast-facts { grid-template-columns: 1fr; }  /* Stack facts vertically */
         .albums-top { display: block; }
         .albums-top p { margin-top: 14px; }
         .album-grid { grid-template-columns: 1fr; }  /* Single column for albums */
         .album { min-height: 285px; }
+        .song-list li { 
+          grid-template-columns: 36px 1fr;
+          gap: 10px;
+        }
+        .song-list span {
+          grid-column: 2;
+          text-align: left;
+          font-size: .62rem;
+          margin-top: 4px;
+        }
+        .finale::after {
+          width: 240px;
+          height: 240px;
+          right: -50px;
+          bottom: -90px;
+        }
+        /* Ensure touch targets are at least 44px */
+        .pill, .site-header nav a {
+          min-height: 44px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+      
+      /* High DPI / Retina display optimization */
+      @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        body {
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+      }
+      
+      /* Print styles for better printability */
+      @media print {
+        .site-header, .hero-photo, .hero-sticker, .finale::after {
+          display: none;
+        }
+        .hero {
+          box-shadow: none;
+          border: 1px solid #ccc;
+        }
+        body {
+          background: white;
+          color: black;
+        }
+        .album::before {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
       }
     </style>
   </head>
@@ -698,6 +1389,12 @@
         - ::after pseudo-element: Dark overlay for text readability
         - Hover: Background scales 7% for zoom effect
         
+        
+        VISUAL EFFECTS:
+        - ::before pseudo-element: Album-specific gradient background
+        - ::after pseudo-element: Dark overlay for text readability
+        - Hover: Background scales 7% for zoom effect
+        
         ACCESSIBILITY:
         - aria-labelledby connects to section heading
         - id="albums" matches nav link
@@ -735,6 +1432,12 @@
         SONGS SECTION
         ================================================================
         Curated 5-song starter playlist for new listeners.
+        
+        LAYOUT:
+        - Two-column CSS Grid
+        - Left: Section introduction
+        - Right: Custom styled ordered list
+        
         
         LAYOUT:
         - Two-column CSS Grid
