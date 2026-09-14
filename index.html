@@ -238,6 +238,7 @@
       * { box-sizing: border-box; }  /* Include padding/border in element width calculations */
       
       /* Smooth scrolling for anchor link navigation with reduced motion support */
+      /* Smooth scrolling for anchor link navigation */
       html { scroll-behavior: smooth; }
       
       /* Respect user preference for reduced motion */
@@ -264,6 +265,7 @@
         line-height: 1.6;  /* Improved line height for readability */
         -webkit-font-smoothing: antialiased;  /* Smoother fonts on macOS */
         -moz-osx-font-smoothing: grayscale;   /* Smoother fonts on Firefox */
+        font-family: "DM Mono", monospace;  /* Monospace font for body text */
         
         /* 
           LAYERED BACKGROUNDS (rendered bottom to top):
@@ -274,6 +276,8 @@
           
           This creates depth and visual interest without images.
           Updated colors for modern aesthetic.
+          
+          This creates depth and visual interest without images.
         */
         background:
           radial-gradient(circle at 50% 80%, rgba(243, 232, 255, 0.6), transparent 28rem),
@@ -291,6 +295,9 @@
         outline-offset: 2px;
         border-radius: var(--radius-sm);
       }
+      
+      /* Links inherit parent text color for consistency */
+      a { color: inherit; }
       
       /* 
         ========================================
@@ -337,6 +344,7 @@
         Site header with logo and navigation.
         Uses Flexbox for horizontal layout with glassmorphism effect.
         Sticky positioning for modern UX pattern.
+        Uses Flexbox for horizontal layout.
       */
       .site-header { 
         display: flex; 
@@ -398,6 +406,12 @@
       .site-header nav a:hover::after {
         width: 100%;
       }
+      .logo { color: var(--hot-pink); font-family: "Playfair Display", Georgia, serif; font-size: 1.43rem; font-style: italic; font-weight: 800; text-decoration: none; }
+      
+      /* Navigation: Horizontal row of uppercase links */
+      .site-header nav { display: flex; gap: 20px; font-size: 0.73rem; letter-spacing: 0.08em; text-transform: uppercase; }
+      .site-header nav a { text-decoration: none; }
+      .site-header nav a:hover { color: var(--hot-pink); }  /* Hover: changes to hot pink */
 
       /* 
         ========================================
@@ -405,12 +419,6 @@
         ========================================
         The hero is the first visual section visitors see.
         Uses a two-column CSS Grid layout: text left, image right.
-        
-        MODERN UI ENHANCEMENTS:
-        - Glassmorphism effect with backdrop blur
-        - Elevated shadow for depth
-        - Smooth hover animations
-        - Improved border radius for contemporary feel
         
         KEY TECHNIQUES:
         - CSS Grid for two-dimensional layout
@@ -433,6 +441,10 @@
       }
       .hero:hover {
         box-shadow: var(--shadow-xl);     /* Enhanced shadow on hover */
+        border: 1px solid rgba(255,255,255,.72);  /* Subtle white border */
+        border-radius: 30px;              /* Rounded corners for modern look */
+        background: var(--paper);         /* Semi-transparent white background */
+        box-shadow: var(--shadow);        /* Drop shadow from CSS variable */
       }
       
       /* 
@@ -440,12 +452,7 @@
         Flexbox used to align content to bottom of container.
         Padding uses clamp() for responsive sizing between 30px and 76px.
       */
-      .hero-copy { 
-        display: flex; 
-        flex-direction: column; 
-        justify-content: flex-end; 
-        padding: clamp(30px, 6vw, 76px);
-      }
+      .hero-copy { display: flex; flex-direction: column; justify-content: flex-end; padding: clamp(30px, 6vw, 76px); }
       
       /* Reset default margins on typography elements */
       h1, h2, h3, p { margin-top: 0; }
@@ -459,7 +466,6 @@
           * Preferred: 8% of viewport width
           * Maximum: 7.1rem
         - 'ch' unit = width of character "0" in current font
-        Updated to use CSS variable for font family
       */
       h1 { 
         max-width: 8ch; 
@@ -497,6 +503,15 @@
         - Subtle lift animation
         - Glow effect on hover
         - Gradient background option
+      .hero-copy p { max-width: 48ch; font-size: .92rem; line-height: 1.8; }
+      
+      /* Button container: Flexbox with wrapping for mobile */
+      .hero-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+      
+      /* 
+        PILL BUTTONS
+        ============
+        Fully rounded buttons with hover animation.
         
         ANIMATION: transition property enables smooth changes:
         - transform: vertical movement on hover
@@ -534,6 +549,10 @@
         box-shadow: var(--shadow-glow);
         transform: translateY(-4px);
       }
+      */
+      .pill { display: inline-block; padding: 12px 16px; border: 1px solid var(--ink); border-radius: 999px; font-size: .74rem; letter-spacing: .04em; text-decoration: none; transition: transform .2s ease, background .2s ease; }
+      .pill:hover { transform: translateY(-3px); background: var(--pink); }  /* Lift up + pink background */
+      .pill.filled { border-color: var(--hot-pink); background: var(--hot-pink); color: white; }  /* Solid hot pink variant */
       
       /* Decorative badge image with responsive max-width */
       .hero-badge {
@@ -639,6 +658,8 @@
         text-transform: uppercase;
         font-weight: 500;
       }
+      */
+      .hero-note { position: absolute; right: 0; bottom: 0; left: 0; padding: 24px 28px; color: white; background: linear-gradient(transparent, rgba(58, 13, 38, .76)); font-size: .67rem; letter-spacing: .12em; text-transform: uppercase; }
 
       /* 
         ========================================
@@ -680,6 +701,9 @@
         line-height: 1.9;
         color: var(--ink-light);
       }
+      */
+      .section-title { font-family: "Playfair Display", Georgia, serif; font-size: clamp(2.5rem, 5vw, 4.8rem); letter-spacing: -.055em; line-height: .94; }
+      .intro p { max-width: 58ch; font-size: .89rem; line-height: 1.9; }
       
       /* 
         FAST FACTS GRID
@@ -736,6 +760,9 @@
         - Hover zoom effects
         - Gradient overlays for text readability
         - Consistent spacing system
+        ALBUMS SECTION
+        ========================================
+        Grid of 12 album cards, each with unique color theme.
       */
       .albums { 
         padding: clamp(60px, 8vw, 76px) 0 clamp(70px, 9vw, 88px); 
@@ -766,6 +793,12 @@
       /* 
         ALBUM CARD - MODERN DESIGN
         ==========================
+      /* Album grid: 3 equal columns */
+      .album-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+      
+      /* 
+        ALBUM CARD
+        ==========
         Complex component with layered pseudo-elements.
         
         LAYER STACKING (bottom to top):
@@ -826,6 +859,7 @@
       .album:hover::before { 
         transform: scale(1.07); 
       }
+      .album:hover::before { transform: scale(1.07); }
       
       .album .year { 
         margin-bottom: 7px; 
@@ -884,6 +918,7 @@
       /* 
         ========================================
         SONGS SECTION - MODERN LIST DESIGN
+        SONGS SECTION
         ========================================
         Two-column layout with custom styled ordered list.
         
@@ -921,12 +956,14 @@
         list-style: none; 
         border-top: 2px solid var(--hot-pink); 
       }
+      .song-list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--ink); }
       
       /* 
         LIST ITEMS WITH CSS GRID
         =======================
         Three-column layout per song:
         - Column 1 (42px): Track number in pink circle
+        - Column 1 (42px): Track number in pink
         - Column 2 (1fr): Song title in decorative font
         - Column 3 (auto): Album name, right-aligned
         
@@ -991,6 +1028,10 @@
         - Enhanced shadow for depth
         - Animated decorative elements
         - Better text contrast
+        FINALE SECTION
+        ========================================
+        Closing statement on hot pink background.
+        Features decorative circle element using ::after.
       */
       .finale { 
         margin-bottom: 50px; 
@@ -1059,6 +1100,13 @@
       footer a:hover {
         color: var(--pink);
       }
+      */
+      .finale::after { position: absolute; right: -75px; bottom: -115px; width: 340px; height: 340px; border: 34px solid rgba(255, 216, 234, .34); border-radius: 50%; content: ""; }
+      .finale h2 { max-width: 10ch; margin-bottom: 18px; font-family: "Playfair Display", Georgia, serif; font-size: clamp(2.6rem, 5vw, 5rem); font-style: italic; letter-spacing: -.055em; line-height: .9; }
+      .finale p { position: relative; z-index: 1; max-width: 54ch; font-size: .8rem; line-height: 1.8; }
+      
+      /* Site footer: Centered small text */
+      footer { padding: 0 0 30px; color: rgba(60, 23, 48, .7); font-size: .65rem; line-height: 1.7; text-align: center; }
 
       /* 
         ========================================
@@ -1084,6 +1132,16 @@
         - Scale down decorative elements
         - Stack facts and albums vertically
         - Optimize touch targets
+        BREAKPOINT 1: 850px (Tablets)
+        - Stack two-column grids to single column
+        - Reduce album grid from 3 to 2 columns
+        
+        BREAKPOINT 2: 560px (Phones)
+        - Adjust container padding
+        - Stack navigation vertically
+        - Reduce hero/image heights
+        - Scale down sticker badge
+        - Stack facts and albums vertically
       */
       @media (max-width: 850px) {
         .hero, .intro, .songs { grid-template-columns: 1fr; }  /* Stack to single column */
@@ -1331,6 +1389,12 @@
         - ::after pseudo-element: Dark overlay for text readability
         - Hover: Background scales 7% for zoom effect
         
+        
+        VISUAL EFFECTS:
+        - ::before pseudo-element: Album-specific gradient background
+        - ::after pseudo-element: Dark overlay for text readability
+        - Hover: Background scales 7% for zoom effect
+        
         ACCESSIBILITY:
         - aria-labelledby connects to section heading
         - id="albums" matches nav link
@@ -1368,6 +1432,12 @@
         SONGS SECTION
         ================================================================
         Curated 5-song starter playlist for new listeners.
+        
+        LAYOUT:
+        - Two-column CSS Grid
+        - Left: Section introduction
+        - Right: Custom styled ordered list
+        
         
         LAYOUT:
         - Two-column CSS Grid
